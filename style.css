@@ -20,7 +20,44 @@ body {
     overflow: hidden;
 }
 
-/* SIDEBAR */
+/* ---------------------------------------------------
+   INTRO VIDEO
+---------------------------------------------------*/
+
+#intro-container {
+    position: fixed;
+    inset: 0;
+    background: black;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+#introVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ELEMENT HIDDEN BY DEFAULT */
+.hidden {
+    opacity: 0;
+}
+
+/* FADE IN ANIMATION */
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ---------------------------------------------------
+   SIDEBAR
+---------------------------------------------------*/
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -39,7 +76,7 @@ body {
     transform: translateX(-100%);
 }
 
-/* HAMBURGER (BOTTOM LEFT ON MOBILE) */
+/* HAMBURGER (BOTTOM LEFT) */
 .hamburger {
     display: none;
     position: fixed;
@@ -120,7 +157,10 @@ body {
     z-index: 40;
 }
 
-/* PAGES */
+/* ---------------------------------------------------
+   PAGES
+---------------------------------------------------*/
+
 .pages-wrapper {
     position: fixed;
     top: 0;
@@ -153,7 +193,10 @@ body {
     font-size: 3.5rem;
 }
 
-/* DOTS */
+/* ---------------------------------------------------
+   DOTS
+---------------------------------------------------*/
+
 .dots {
     position: fixed;
     bottom: 40px;
@@ -177,7 +220,10 @@ body {
     background: white;
 }
 
-/* CIRCLE BUTTON */
+/* ---------------------------------------------------
+   CIRCLE BUTTON
+---------------------------------------------------*/
+
 .circle-btn {
     position: fixed;
     bottom: 30px;
@@ -189,9 +235,10 @@ body {
     z-index: 40;
 }
 
-/* ------------------------------------
-   SOCIAL ICONS (DESKTOP)
-------------------------------------*/
+/* ---------------------------------------------------
+   SOCIAL ICONS
+---------------------------------------------------*/
+
 .social-icons {
     position: absolute;
     bottom: 25px;
@@ -212,10 +259,10 @@ body {
     opacity: 0.7;
 }
 
-
-/* ------------------------------
+/* ---------------------------------------------------
    MOBILE RESPONSIVE
-------------------------------*/
+---------------------------------------------------*/
+
 @media (max-width: 900px) {
 
     .hamburger {
@@ -266,10 +313,8 @@ body {
         top: 25px;
         left: 25px;
 
-        /* Behind the mobile sidebar */
-        z-index: 20; 
-
-        /* Mobile size */
+        /* Behind mobile sidebar */
+        z-index: 20;
         gap: 14px;
     }
 
