@@ -310,12 +310,11 @@ body {
 
     .home-text {
     font-size: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     }
 
     .big-typo {
         font-size: 25px;
-        margin-bottom: 25px;
     }
 
     .dots {
@@ -344,3 +343,4 @@ body {
         height: 30px;
     }
 }
+
