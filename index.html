@@ -8,13 +8,19 @@
 </head>
 <body>
 
-    <!-- MOBILE HAMBURGER (BOTTOM-LEFT NOW) -->
-    <div class="hamburger" id="hamburger">☰</div>
+    <!-- INTRO VIDEO -->
+    <div id="intro-container">
+        <video id="introVideo" autoplay playsinline muted>
+            <source src="pictures/ani.mp4" type="video/mp4" />
+        </video>
+    </div>
+
+    <!-- MOBILE HAMBURGER -->
+    <div class="hamburger hidden" id="hamburger">☰</div>
 
     <!-- LEFT SIDEBAR -->
-    <div class="sidebar" id="sidebar">
+    <div class="sidebar hidden" id="sidebar">
 
-        <!-- Schedule Pickup -->
         <div class="pickup-toggle">
             <button id="pickupBtn">
                 SCHEDULE PICKUP 
@@ -27,53 +33,35 @@
             </div>
         </div>
 
-        <!-- Menu Items -->
         <div class="menu">
             <a class="menu-item" data-target="home">HOME</a>
             <a class="menu-item" data-target="services">SERVICES</a>
             <a class="menu-item" data-target="about">ABOUT</a>
             <a class="menu-item" data-target="contact">CONTACT</a>
         </div>
-
-
     </div>
 
     <!-- SOCIAL ICONS -->
-<div class="social-icons">
-    <a href="#" target="_blank">
-        <img src="pictures\icons8-facebook-50.png" alt="Facebook">
-    </a>
-    <a href="#" target="_blank">
-        <img src="pictures\icons8-instagram-50.png" alt="Instagram">
-    </a>
-</div>
+    <div class="social-icons hidden">
+        <a href="#"><img src="pictures/icons8-facebook-50.png" /></a>
+        <a href="#"><img src="pictures/icons8-instagram-50.png" /></a>
+    </div>
 
     <!-- Top Right Login -->
-    <div class="top-right-login">CLIENT LOGIN</div>
+    <div class="top-right-login hidden">CLIENT LOGIN</div>
 
     <!-- Horizontal Scrolling Pages -->
-    <div class="pages-wrapper" id="pagesWrapper">
+    <div class="pages-wrapper hidden" id="pagesWrapper">
 
-        <section class="page" id="home" style="background:#111;">
-            HOME
-        </section>
-
-        <section class="page" id="services" style="background:#222;">
-            SERVICES
-        </section>
-
-        <section class="page" id="about" style="background:#333;">
-            ABOUT
-        </section>
-
-        <section class="page" id="contact" style="background:#444;">
-            CONTACT
-        </section>
+        <section class="page" id="home" style="background:#111;">HOME</section>
+        <section class="page" id="services" style="background:#222;">SERVICES</section>
+        <section class="page" id="about" style="background:#333;">ABOUT</section>
+        <section class="page" id="contact" style="background:#444;">CONTACT</section>
 
     </div>
 
     <!-- Dot Indicators -->
-    <div class="dots" id="dots">
+    <div class="dots hidden" id="dots">
         <div class="dot active"></div>
         <div class="dot"></div>
         <div class="dot"></div>
@@ -81,7 +69,7 @@
     </div>
 
     <!-- Circle Button -->
-    <div class="circle-btn"></div>
+    <div class="circle-btn hidden"></div>
 
     <script src="script.js"></script>
 </body>
