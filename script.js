@@ -1,7 +1,4 @@
-/* ---------------------------------------------------
-   INTRO FADE SEQUENCE
----------------------------------------------------*/
-
+/* INTRO FADE SEQUENCE */
 const intro = document.getElementById("intro-container");
 const introVideo = document.getElementById("introVideo");
 
@@ -16,11 +13,9 @@ const fadeOrder = [
 ];
 
 introVideo.onended = () => {
-    // fade out intro
     intro.style.opacity = 0;
     setTimeout(() => intro.style.display = "none", 700);
 
-    // fade in elements one by one
     fadeOrder.forEach((el, index) => {
         setTimeout(() => {
             el.classList.remove("hidden");
@@ -29,19 +24,45 @@ introVideo.onended = () => {
     });
 };
 
+/* --------------------------------------------------------- */
+/* 🔥 HOME VIDEO DESKTOP / MOBILE SWITCH                     */
+/* --------------------------------------------------------- */
 
-/* ---------------------------------------------------
-   PICKUP DROPDOWN
----------------------------------------------------*/
+const homeVideo = document.querySelector(".home-bg-video");
+
+if (homeVideo) {
+    const mobileVersion = "pictures/STG_flashmobile.mp4";
+    const desktopVersion = "pictures/STG_flash.mp4";
+
+    function setHomeVideoSource() {
+        const isMobile = window.innerWidth <= 900;
+        const correctSrc = isMobile ? mobileVersion : desktopVersion;
+
+        // Only change if needed (prevents reload loops)
+        if (homeVideo.src.includes(correctSrc)) return;
+
+        homeVideo.innerHTML = `
+            <source src="${correctSrc}" type="video/mp4">
+        `;
+
+        homeVideo.load();
+        homeVideo.play();
+    }
+
+    // Run on load
+    setHomeVideoSource();
+
+    // Run if user rotates phone or resizes window
+    window.addEventListener("resize", setHomeVideoSource);
+}
+
+/* PICKUP DROPDOWN */
 pickupBtn.onclick = () => {
     pickupDropdown.style.display =
         pickupDropdown.style.display === "flex" ? "none" : "flex";
 };
 
-
-/* ---------------------------------------------------
-   HORIZONTAL SCROLL (DESKTOP)
----------------------------------------------------*/
+/* HORIZONTAL SCROLL (DESKTOP) */
 const wrapper = document.getElementById("pagesWrapper");
 
 wrapper.addEventListener("wheel", (e) => {
@@ -51,11 +72,7 @@ wrapper.addEventListener("wheel", (e) => {
     }
 }, { passive: false });
 
-
-/* ---------------------------------------------------
-   DOT INDICATORS
----------------------------------------------------*/
-
+/* DOT INDICATORS */
 const pages = document.querySelectorAll(".page");
 const dots = document.querySelectorAll(".dot");
 
@@ -73,20 +90,12 @@ function updateDots() {
 
 wrapper.addEventListener("scroll", updateDots);
 
-
-/* ---------------------------------------------------
-   HAMBURGER MENU
----------------------------------------------------*/
-
+/* HAMBURGER MENU */
 hamburger.onclick = () => {
     sidebar.classList.toggle("open");
 };
 
-
-/* ---------------------------------------------------
-   MENU LINKS SCROLL NAVIGATION
----------------------------------------------------*/
-
+/* MENU LINKS NAVIGATION */
 document.querySelectorAll(".menu-item").forEach((item, i) => {
     item.onclick = () => {
         if (window.innerWidth > 900) {
@@ -105,30 +114,71 @@ document.querySelectorAll(".menu-item").forEach((item, i) => {
     };
 });
 
-/* ---------------------------------------------------
-   FADE IN SECTIONS WHEN VISIBLE
----------------------------------------------------*/
-
+/* FADE IN SECTIONS WHEN VISIBLE */
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add("visible");
         }
     });
-}, {
-    threshold: 0.35  // percentage of visibility needed
-});
+}, { threshold: 0.35 });
 
-// apply fade observer to every page & its children
 pages.forEach(page => {
     page.classList.add("fade-section");
-
-    // fade in all text, headings, images, buttons inside
     page.querySelectorAll("*").forEach(child => {
         child.classList.add("fade-section");
         observer.observe(child);
     });
-
     observer.observe(page);
 });
 
+/* --------------------------------------------------------- */
+/* 🔥 3D MODEL – DRAG TO ROTATE Z AXIS ONLY                  */
+/* --------------------------------------------------------- */
+
+const bottleModel = document.getElementById("bottleModel");
+
+if (bottleModel) {
+
+    let dragging = false;
+    let lastX = 0;
+    let rotationZ = 0;
+
+    /* Mouse down */
+    bottleModel.addEventListener("mousedown", (e) => {
+        dragging = true;
+        lastX = e.clientX;
+    });
+
+    window.addEventListener("mouseup", () => dragging = false);
+
+    window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+
+        const dx = e.clientX - lastX;
+        lastX = e.clientX;
+
+        rotationZ += dx * 0.5;
+
+        bottleModel.style.transform = `rotateZ(${rotationZ}deg)`;
+    });
+
+    /* Touch start */
+    bottleModel.addEventListener("touchstart", (e) => {
+        dragging = true;
+        lastX = e.touches[0].clientX;
+    });
+
+    window.addEventListener("touchend", () => dragging = false);
+
+    window.addEventListener("touchmove", (e) => {
+        if (!dragging) return;
+
+        const dx = e.touches[0].clientX - lastX;
+        lastX = e.touches[0].clientX;
+
+        rotationZ += dx * 0.5;
+
+        bottleModel.style.transform = `rotateZ(${rotationZ}deg)`;
+    });
+}
