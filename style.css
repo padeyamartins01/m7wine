@@ -186,8 +186,8 @@ body {
 
 /* Container inside each page */
 .page-container {
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -203,6 +203,38 @@ body {
 .big-typo {
     font-size: 1em;
 }
+
+/* Background video – fills container */
+.home-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 1;
+}
+
+/* Bottle container */
+.bottle-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 5; /* on top of video */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* model-viewer sizing (adjust as needed) */
+model-viewer {
+    width: 300px;
+    height: 500px;
+    pointer-events: auto;
+    touch-action: none;
+}
+
 
 /* fade-in for page contents */
 .fade-section {
@@ -343,4 +375,3 @@ body {
         height: 30px;
     }
 }
-
