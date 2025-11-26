@@ -340,14 +340,6 @@ model-viewer {
         font-size: 2.4rem;
     }
 
-    .home-text {
-    font-size: 50px;
-    margin-bottom: 10px;
-    }
-
-    .big-typo {
-        font-size: 25px;
-    }
 
     .dots {
         flex-direction: row;
