@@ -173,7 +173,7 @@ body {
 
 .page {
     width: 75vw;
-    height: 100vh;
+    height: 100dvh;
     flex-shrink: 0;
     scroll-snap-align: start;
 
