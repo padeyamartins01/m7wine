@@ -104,3 +104,31 @@ document.querySelectorAll(".menu-item").forEach((item, i) => {
         sidebar.classList.remove("open");
     };
 });
+
+/* ---------------------------------------------------
+   FADE IN SECTIONS WHEN VISIBLE
+---------------------------------------------------*/
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+        }
+    });
+}, {
+    threshold: 0.35  // percentage of visibility needed
+});
+
+// apply fade observer to every page & its children
+pages.forEach(page => {
+    page.classList.add("fade-section");
+
+    // fade in all text, headings, images, buttons inside
+    page.querySelectorAll("*").forEach(child => {
+        child.classList.add("fade-section");
+        observer.observe(child);
+    });
+
+    observer.observe(page);
+});
+
