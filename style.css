@@ -293,6 +293,7 @@ body {
     .pages-wrapper {
         width: 100vw;
         left: 0;
+        bottom: 10px;
 
         flex-direction: column;
         overflow-x: hidden;
@@ -305,7 +306,6 @@ body {
         width: 100vw;
         height: 100vh;
         font-size: 2.4rem;
-        margin-bottom: 10px;
     }
 
     .home-text {
