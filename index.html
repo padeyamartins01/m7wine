@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horizontal Site</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- MOBILE HAMBURGER (BOTTOM-LEFT NOW) -->
+    <div class="hamburger" id="hamburger">☰</div>
+
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+
+        <!-- Schedule Pickup -->
+        <div class="pickup-toggle">
+            <button id="pickupBtn">
+                SCHEDULE PICKUP 
+                <span class="arrow">></span>
+            </button>
+
+            <div class="dropdown" id="pickupDropdown">
+                <a href="#">WINERY/CUSTOMER PICK UP</a>
+                <a href="#">DISTRIBUTOR PICK UP</a>
+            </div>
+        </div>
+
+        <!-- Menu Items -->
+        <div class="menu">
+            <a class="menu-item" data-target="home">HOME</a>
+            <a class="menu-item" data-target="services">SERVICES</a>
+            <a class="menu-item" data-target="about">ABOUT</a>
+            <a class="menu-item" data-target="contact">CONTACT</a>
+        </div>
+
+        <!-- SOCIAL ICONS -->
+<div class="social-icons">
+    <a href="#" target="_blank">
+        <img src="pictures\icons8-facebook-50.png" alt="Facebook">
+    </a>
+    <a href="#" target="_blank">
+        <img src="pictures\icons8-instagram-50.png" alt="Instagram">
+    </a>
+</div>
+
+    </div>
+
+    <!-- Top Right Login -->
+    <div class="top-right-login">CLIENT LOGIN</div>
+
+    <!-- Horizontal Scrolling Pages -->
+    <div class="pages-wrapper" id="pagesWrapper">
+
+        <section class="page" id="home" style="background:#111;">
+            HOME
+        </section>
+
+        <section class="page" id="services" style="background:#222;">
+            SERVICES
+        </section>
+
+        <section class="page" id="about" style="background:#333;">
+            ABOUT
+        </section>
+
+        <section class="page" id="contact" style="background:#444;">
+            CONTACT
+        </section>
+
+    </div>
+
+    <!-- Dot Indicators -->
+    <div class="dots" id="dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <!-- Circle Button -->
+    <div class="circle-btn"><img src="pictures\ai.png"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
