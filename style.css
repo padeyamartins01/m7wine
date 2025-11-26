@@ -80,9 +80,9 @@ body {
 .hamburger {
     display: none;
     position: fixed;
-    bottom: 25px;
+    bottom: 7px;
     left: 25px;
-    font-size: 2.3rem;
+    font-size: 3rem;
     z-index: 120;
     cursor: pointer;
     padding: 5px 10px;
