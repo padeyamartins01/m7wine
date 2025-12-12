@@ -1,9 +1,25 @@
 /* -------------------------------------------------
    INTRO FADE SEQUENCE — PLAY ONCE PER SESSION
+   + MOBILE / DESKTOP INTRO VIDEO
 ------------------------------------------------- */
 
 const intro = document.getElementById("intro-container");
 const introVideo = document.getElementById("introVideo");
+
+/* Intro sources */
+const introDesktopSrc = "pictures/ani2.mp4";
+const introMobileSrc  = "pictures\animobile.mp4";
+
+/* Decide correct intro video */
+function setIntroVideoSource() {
+    const isMobile = window.innerWidth <= 900;
+    const correctSrc = isMobile ? introMobileSrc : introDesktopSrc;
+
+    if (!introVideo.src.includes(correctSrc)) {
+        introVideo.src = correctSrc;
+        introVideo.load();
+    }
+}
 
 const fadeOrder = [
     document.getElementById("sidebar"),
@@ -15,19 +31,21 @@ const fadeOrder = [
     document.getElementById("hamburger")
 ];
 
-// If intro already played this session → skip it
+// If intro already played this session → skip
 if (sessionStorage.getItem("introPlayed")) {
     intro.style.display = "none";
 
-    // Immediately reveal UI in correct order
     fadeOrder.forEach((el, index) => {
         setTimeout(() => {
             el.classList.remove("hidden");
             el.classList.add("fade-in");
         }, index * 100);
     });
+
 } else {
-    // First visit → play intro
+    // First visit → set correct intro video
+    setIntroVideoSource();
+
     introVideo.onended = () => {
         sessionStorage.setItem("introPlayed", "true");
 
@@ -42,6 +60,13 @@ if (sessionStorage.getItem("introPlayed")) {
         });
     };
 }
+
+/* Update intro video if device resizes BEFORE intro finishes */
+window.addEventListener("resize", () => {
+    if (!sessionStorage.getItem("introPlayed")) {
+        setIntroVideoSource();
+    }
+});
 
 /* ---------------------------------------------------------
    🔥 HOME VIDEO DESKTOP / MOBILE SWITCH
