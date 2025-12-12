@@ -253,3 +253,26 @@ serviceThumbs.forEach(thumb => {
         hoverLabel.style.top = e.clientY + "px";
     });
 });
+
+/* ----------------------------------
+   MOBILE SERVICE THUMB TAP CAPTIONS
+---------------------------------- */
+
+if (window.innerWidth <= 900) {
+  const thumbs = document.querySelectorAll(".service-thumb");
+
+  thumbs.forEach(thumb => {
+    thumb.addEventListener("click", () => {
+
+      // Close any other open captions
+      thumbs.forEach(t => {
+        if (t !== thumb) t.classList.remove("active");
+      });
+
+      // Toggle current
+      thumb.classList.toggle("active");
+    });
+  });
+}
+
+
