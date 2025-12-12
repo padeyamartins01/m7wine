@@ -397,8 +397,8 @@ model-viewer {
 .service {
     display: flex;
     align-items: center;
-    gap: 50px;
-    margin-bottom: 120px;
+    gap: 30px;
+    margin-bottom: 50px;
 }
 
 .service.reverse {
@@ -414,10 +414,11 @@ model-viewer {
 .service h2 {
     letter-spacing: 3px;
     margin-bottom: 15px;
+    font-size: 2.3rem;
 }
 
 .service p {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     line-height: 1.6;
     opacity: 0.85;
 }
@@ -549,5 +550,4 @@ model-viewer {
     outline: none !important;
     color: white;
 }
-
 
