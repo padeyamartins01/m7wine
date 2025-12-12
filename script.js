@@ -1,6 +1,6 @@
 /* -------------------------------------------------
    INTRO FADE SEQUENCE — PLAY ONCE PER SESSION
-   + MOBILE / DESKTOP INTRO VIDEO
+   + MOBILE / DESKTOP INTRO VIDEO (MOBILE SAFE)
 ------------------------------------------------- */
 
 const intro = document.getElementById("intro-container");
@@ -8,19 +8,37 @@ const introVideo = document.getElementById("introVideo");
 
 /* Intro sources */
 const introDesktopSrc = "pictures/ani2.mp4";
-const introMobileSrc  = "pictures\animobile.mp4";
+const introMobileSrc  = "pictures/ani2_mobile.mp4";
 
-/* Decide correct intro video */
+/* Pick correct intro source */
 function setIntroVideoSource() {
     const isMobile = window.innerWidth <= 900;
     const correctSrc = isMobile ? introMobileSrc : introDesktopSrc;
 
-    if (!introVideo.src.includes(correctSrc)) {
-        introVideo.src = correctSrc;
-        introVideo.load();
+    // Replace <source> for iOS compatibility
+    introVideo.innerHTML = `
+        <source src="${correctSrc}" type="video/mp4">
+    `;
+
+    // Re-assert mobile-safe attributes
+    introVideo.muted = true;
+    introVideo.playsInline = true;
+    introVideo.setAttribute("playsinline", "");
+    introVideo.setAttribute("webkit-playsinline", "");
+
+    introVideo.load();
+
+    // Force playback (required on mobile)
+    const playPromise = introVideo.play();
+    if (playPromise !== undefined) {
+        playPromise.catch(() => {
+            // Autoplay blocked – user gesture required (rare but safe)
+            console.warn("Intro autoplay blocked on this device.");
+        });
     }
 }
 
+/* Elements to fade in */
 const fadeOrder = [
     document.getElementById("sidebar"),
     document.querySelector(".social-icons"),
@@ -31,7 +49,7 @@ const fadeOrder = [
     document.getElementById("hamburger")
 ];
 
-// If intro already played this session → skip
+/* Skip intro if already played */
 if (sessionStorage.getItem("introPlayed")) {
     intro.style.display = "none";
 
@@ -43,7 +61,7 @@ if (sessionStorage.getItem("introPlayed")) {
     });
 
 } else {
-    // First visit → set correct intro video
+    // First visit → set & play intro
     setIntroVideoSource();
 
     introVideo.onended = () => {
@@ -61,12 +79,13 @@ if (sessionStorage.getItem("introPlayed")) {
     };
 }
 
-/* Update intro video if device resizes BEFORE intro finishes */
+/* Handle device rotation BEFORE intro finishes */
 window.addEventListener("resize", () => {
     if (!sessionStorage.getItem("introPlayed")) {
         setIntroVideoSource();
     }
 });
+
 
 /* ---------------------------------------------------------
    🔥 HOME VIDEO DESKTOP / MOBILE SWITCH
