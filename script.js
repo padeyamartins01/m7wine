@@ -1,44 +1,21 @@
 /* -------------------------------------------------
-   INTRO FADE SEQUENCE — PLAY ONCE PER SESSION
-   + MOBILE / DESKTOP INTRO VIDEO (MOBILE SAFE)
+   INTRO FADE SEQUENCE — MOBILE SAFE & SESSION-AWARE
 ------------------------------------------------- */
 
 const intro = document.getElementById("intro-container");
 const introVideo = document.getElementById("introVideo");
 
-/* Intro sources */
 const introDesktopSrc = "pictures/ani2.mp4";
-const introMobileSrc  = "pictures/ani2_mobile.mp4";
+const introMobileSrc  = "pictures\animobile.mp4";
 
-/* Pick correct intro source */
-function setIntroVideoSource() {
-    const isMobile = window.innerWidth <= 900;
-    const correctSrc = isMobile ? introMobileSrc : introDesktopSrc;
+const isMobile = window.innerWidth <= 900;
 
-    // Replace <source> for iOS compatibility
-    introVideo.innerHTML = `
-        <source src="${correctSrc}" type="video/mp4">
-    `;
-
-    // Re-assert mobile-safe attributes
-    introVideo.muted = true;
-    introVideo.playsInline = true;
-    introVideo.setAttribute("playsinline", "");
-    introVideo.setAttribute("webkit-playsinline", "");
-
-    introVideo.load();
-
-    // Force playback (required on mobile)
-    const playPromise = introVideo.play();
-    if (playPromise !== undefined) {
-        playPromise.catch(() => {
-            // Autoplay blocked – user gesture required (rare but safe)
-            console.warn("Intro autoplay blocked on this device.");
-        });
-    }
+/* ⚠️ Force reset intro on mobile refresh */
+if (isMobile) {
+    sessionStorage.removeItem("introPlayed");
 }
 
-/* Elements to fade in */
+/* Fade targets */
 const fadeOrder = [
     document.getElementById("sidebar"),
     document.querySelector(".social-icons"),
@@ -49,20 +26,36 @@ const fadeOrder = [
     document.getElementById("hamburger")
 ];
 
-/* Skip intro if already played */
+/* Pick correct source */
+function playIntro() {
+    const src = isMobile ? introMobileSrc : introDesktopSrc;
+
+    introVideo.innerHTML = `<source src="${src}" type="video/mp4">`;
+    introVideo.muted = true;
+    introVideo.setAttribute("playsinline", "");
+    introVideo.setAttribute("webkit-playsinline", "");
+
+    introVideo.load();
+
+    requestAnimationFrame(() => {
+        const p = introVideo.play();
+        if (p) p.catch(() => console.warn("Intro autoplay blocked"));
+    });
+}
+
+/* Skip if already played (desktop only) */
 if (sessionStorage.getItem("introPlayed")) {
     intro.style.display = "none";
 
-    fadeOrder.forEach((el, index) => {
+    fadeOrder.forEach((el, i) => {
         setTimeout(() => {
             el.classList.remove("hidden");
             el.classList.add("fade-in");
-        }, index * 100);
+        }, i * 100);
     });
 
 } else {
-    // First visit → set & play intro
-    setIntroVideoSource();
+    playIntro();
 
     introVideo.onended = () => {
         sessionStorage.setItem("introPlayed", "true");
@@ -70,21 +63,15 @@ if (sessionStorage.getItem("introPlayed")) {
         intro.style.opacity = 0;
         setTimeout(() => intro.style.display = "none", 700);
 
-        fadeOrder.forEach((el, index) => {
+        fadeOrder.forEach((el, i) => {
             setTimeout(() => {
                 el.classList.remove("hidden");
                 el.classList.add("fade-in");
-            }, index * 350);
+            }, i * 350);
         });
     };
 }
 
-/* Handle device rotation BEFORE intro finishes */
-window.addEventListener("resize", () => {
-    if (!sessionStorage.getItem("introPlayed")) {
-        setIntroVideoSource();
-    }
-});
 
 
 /* ---------------------------------------------------------
