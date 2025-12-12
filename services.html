@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | M7 Wine</title>
+
+  <!-- Reuse your main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Page-specific styles -->
+  <style>
+    /* Enable vertical scrolling */
+    body.scroll-page {
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: #111;
+      color: white;
+    }
+
+    /* Simple header */
+    .services-header {
+      padding: 40px 60px;
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+    }
+
+    .services-header a {
+      color: white;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    .services-header a:hover {
+      opacity: 1;
+    }
+
+    /* Page container */
+    .services-page {
+      padding: 60px 8vw 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 140px;
+    }
+
+    /* Individual service section */
+    .service {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .service.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .service img {
+      width: 50%;
+      height: 420px;
+      object-fit: cover;
+      filter: grayscale(100%);
+    }
+
+    .service-content {
+      width: 50%;
+    }
+
+    .service-content h2 {
+      font-size: 1.8rem;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    .service-content p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      opacity: 0.85;
+      max-width: 520px;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .services-header {
+        padding: 30px;
+      }
+
+      .services-page {
+        padding: 40px 6vw 100px;
+        gap: 100px;
+      }
+
+      .service,
+      .service.reverse {
+        flex-direction: column;
+      }
+
+      .service img,
+      .service-content {
+        width: 100%;
+      }
+
+      .service img {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+
+<body class="scroll-page">
+
+  <!-- Simple back navigation -->
+  <header class="services-header">
+    <a href="index.html">← HOME</a>
+  </header>
+
+  <main class="services-page">
+
+    <section class="service">
+      <img src="pictures/services/services-dtc-shipping.jpg" alt="DTC Shipping">
+      <div class="service-content">
+        <h2>DTC SHIPPING</h2>
+        <p>
+          Our experienced team members process, verify, and pack daily and club
+          shipments with meticulous attention to detail to ensure every package
+          goes out as planned.
+        </p>
+      </div>
+    </section>
+
+    <section class="service reverse">
+      <img src="pictures/services/services-international-shipping.jpg" alt="International Shipping">
+      <div class="service-content">
+        <h2>INTERNATIONAL SHIPPING</h2>
+        <p>
+          Our international shipping specialists guide you through the process
+          and regulations required for successful global deliveries.
+        </p>
+      </div>
+    </section>
+
+    <section class="service">
+      <img src="pictures/services/services-distribution.jpg" alt="Distribution">
+      <div class="service-content">
+        <h2>DISTRIBUTION</h2>
+        <p>
+          We work in close collaboration with you and your carriers to ensure
+          bulk orders are processed quickly and efficiently.
+        </p>
+      </div>
+    </section>
+
+    <section class="service reverse">
+      <img src="pictures/services/services-liviri.jpg" alt="Liviri Vino Shippers">
+      <div class="service-content">
+        <h2>LIVIRI VINO SHIPPERS</h2>
+        <p>
+          Reusable insulated wine shippers with vacuum panels and ice packs
+          provide 5+ days of thermal protection for a superior DTC experience.
+        </p>
+      </div>
+    </section>
+
+    <section class="service">
+      <img src="pictures/services/services-green-cell.jpg" alt="Green Cell Foam">
+      <div class="service-content">
+        <h2>GREEN CELL FOAM</h2>
+        <p>
+          Made from US-grown corn, Green Cell Foam is compostable, dissolvable,
+          and provides exceptional cushioning while protecting the planet.
+        </p>
+      </div>
+    </section>
+
+    <section class="service reverse">
+      <img src="pictures/services/services-vinum55.jpg" alt="Vinum55 Delivery">
+      <div class="service-content">
+        <h2>VINUM55 DOOR TO DOOR DELIVERY</h2>
+        <p>
+          Premium refrigerated concierge-style wine delivery available in select
+          metropolitan areas of Arizona and Texas.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
