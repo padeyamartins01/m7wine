@@ -1,19 +1,3 @@
-/* ----------------------------------
-   MOBILE VIEWPORT HEIGHT FIX
----------------------------------- */
-
-function setViewportHeight() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty("--vh", `${vh * 100}px`);
-}
-
-// Run once on load
-setViewportHeight();
-
-// OPTIONAL: update only on orientation change, NOT scroll
-window.addEventListener("orientationchange", () => {
-    setTimeout(setViewportHeight, 300);
-});
 
 /* -------------------------------------------------
    INTRO — PREVENT FLASH ON RELOAD
