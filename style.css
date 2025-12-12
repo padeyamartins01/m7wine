@@ -540,6 +540,63 @@ model-viewer {
     }
 }
 
+/* ----------------------------------
+   MOBILE FIX — SERVICE THUMB VISIBILITY
+---------------------------------- */
+
+/* ----------------------------------
+   MOBILE TAP CAPTIONS (INSIDE THUMB)
+---------------------------------- */
+
+@media (max-width: 900px) {
+
+  .service-thumb {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    inset: 0;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-align: center;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  /* Active (tapped) state */
+  .service-thumb.active::after {
+    opacity: 1;
+  }
+
+}
+
+/* ----------------------------------
+   DISABLE FLOATING HOVER LABEL ON MOBILE
+---------------------------------- */
+
+@media (max-width: 900px) {
+  #hover-label {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+
+
+
 /* SERVICES HEADER — HARD RESET */
 #services h1 a,
 #services h1 a:visited,
