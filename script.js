@@ -1,16 +1,13 @@
 /* -------------------------------------------------
-   INTRO — MOBILE SAFE WITH FALLBACK
+   INTRO — PREVENT FLASH ON RELOAD
 ------------------------------------------------- */
 
 const intro = document.getElementById("intro-container");
 const introVideo = document.getElementById("introVideo");
 
-const introDesktopSrc = "pictures/ani2.mp4";
 const introMobileSrc  = "pictures/ani2_mobile.mp4";
+const introDesktopSrc = "pictures/ani2.mp4";
 
-const isMobile = window.innerWidth <= 900;
-
-/* Elements to reveal */
 const fadeOrder = [
     document.getElementById("sidebar"),
     document.querySelector(".social-icons"),
@@ -21,64 +18,63 @@ const fadeOrder = [
     document.getElementById("hamburger")
 ];
 
-/* Reveal UI (shared) */
-function revealUI() {
-    intro.style.opacity = 0;
-    setTimeout(() => intro.style.display = "none", 700);
+function revealUI(immediate = false) {
+    if (immediate) {
+        intro.style.display = "none";
+    } else {
+        intro.style.opacity = 0;
+        setTimeout(() => intro.style.display = "none", 700);
+    }
 
     fadeOrder.forEach((el, i) => {
         setTimeout(() => {
             el.classList.remove("hidden");
             el.classList.add("fade-in");
-        }, i * 150);
+        }, immediate ? 0 : i * 150);
     });
 }
 
-/* Play intro safely */
-function playIntro() {
-    const src = isMobile ? introMobileSrc : introDesktopSrc;
+/* -------------------------------------------------
+   SKIP INTRO (NO FLASH)
+------------------------------------------------- */
 
-    introVideo.innerHTML = `<source src="${src}" type="video/mp4">`;
-    introVideo.muted = true;
-    introVideo.setAttribute("playsinline", "");
-    introVideo.setAttribute("webkit-playsinline", "");
-    introVideo.load();
-
-    const playPromise = introVideo.play();
-
-    if (playPromise !== undefined) {
-        playPromise
-            .then(() => {
-                // Autoplay worked
-                introVideo.onended = () => {
-                    sessionStorage.setItem("introPlayed", "true");
-                    revealUI();
-                };
-            })
-            .catch(() => {
-                // ❗ Autoplay blocked → skip intro gracefully
-                console.warn("Intro autoplay blocked — skipping intro");
-                sessionStorage.setItem("introPlayed", "true");
-                revealUI();
-            });
-    }
-}
-
-/* Main logic */
 if (sessionStorage.getItem("introPlayed")) {
-    revealUI();
-} else {
-    playIntro();
+    // 🔑 HARD STOP video before it can render
+    introVideo.pause();
+    introVideo.removeAttribute("autoplay");
+    introVideo.removeAttribute("src");
+    introVideo.innerHTML = "";
 
-    // Absolute safety timeout (never hang)
-    setTimeout(() => {
-        if (intro.style.display !== "none") {
-            console.warn("Intro timeout fallback");
-            sessionStorage.setItem("introPlayed", "true");
-            revealUI();
-        }
-    }, 4000); // 4s max
+    revealUI(true); // immediate, no fade
 }
+
+/* -------------------------------------------------
+   PLAY INTRO (FIRST LOAD ONLY)
+------------------------------------------------- */
+else {
+    function setIntroVideoSource() {
+        const isMobile = window.innerWidth <= 900;
+        const correctSrc = isMobile ? introMobileSrc : introDesktopSrc;
+
+        if (introVideo.currentSrc.includes(correctSrc)) return;
+
+        introVideo.innerHTML = `
+            <source src="${correctSrc}" type="video/mp4">
+        `;
+        introVideo.load();
+    }
+
+    setIntroVideoSource();
+
+    introVideo.onended = () => {
+        sessionStorage.setItem("introPlayed", "true");
+        revealUI();
+    };
+
+    window.addEventListener("resize", setIntroVideoSource);
+}
+
+
 
 
 
