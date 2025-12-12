@@ -390,12 +390,6 @@ model-viewer {
     letter-spacing: 2px;
 }
 
-/* Move Services header down slightly */
-#services .services-title {
-    margin-top: 10px;
-}
-
-
 .services-page {
     padding: 60px 8vw;
 }
@@ -465,7 +459,7 @@ model-viewer {
 }
 
 
-/* Mobile */
+/* Services Mobile */
 @media (max-width: 900px) {
     .service,
     .service.reverse {
@@ -474,6 +468,10 @@ model-viewer {
 
     .service img {
         width: 100%;
+    }
+
+    #services .services-title {
+        margin-top: 14px;
     }
 }
 
