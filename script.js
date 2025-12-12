@@ -1,21 +1,16 @@
 /* -------------------------------------------------
-   INTRO FADE SEQUENCE — MOBILE SAFE & SESSION-AWARE
+   INTRO — MOBILE SAFE WITH FALLBACK
 ------------------------------------------------- */
 
 const intro = document.getElementById("intro-container");
 const introVideo = document.getElementById("introVideo");
 
 const introDesktopSrc = "pictures/ani2.mp4";
-const introMobileSrc  = "pictures\animobile.mp4";
+const introMobileSrc  = "pictures/ani2_mobile.mp4";
 
 const isMobile = window.innerWidth <= 900;
 
-/* ⚠️ Force reset intro on mobile refresh */
-if (isMobile) {
-    sessionStorage.removeItem("introPlayed");
-}
-
-/* Fade targets */
+/* Elements to reveal */
 const fadeOrder = [
     document.getElementById("sidebar"),
     document.querySelector(".social-icons"),
@@ -26,7 +21,20 @@ const fadeOrder = [
     document.getElementById("hamburger")
 ];
 
-/* Pick correct source */
+/* Reveal UI (shared) */
+function revealUI() {
+    intro.style.opacity = 0;
+    setTimeout(() => intro.style.display = "none", 700);
+
+    fadeOrder.forEach((el, i) => {
+        setTimeout(() => {
+            el.classList.remove("hidden");
+            el.classList.add("fade-in");
+        }, i * 150);
+    });
+}
+
+/* Play intro safely */
 function playIntro() {
     const src = isMobile ? introMobileSrc : introDesktopSrc;
 
@@ -34,43 +42,44 @@ function playIntro() {
     introVideo.muted = true;
     introVideo.setAttribute("playsinline", "");
     introVideo.setAttribute("webkit-playsinline", "");
-
     introVideo.load();
 
-    requestAnimationFrame(() => {
-        const p = introVideo.play();
-        if (p) p.catch(() => console.warn("Intro autoplay blocked"));
-    });
+    const playPromise = introVideo.play();
+
+    if (playPromise !== undefined) {
+        playPromise
+            .then(() => {
+                // Autoplay worked
+                introVideo.onended = () => {
+                    sessionStorage.setItem("introPlayed", "true");
+                    revealUI();
+                };
+            })
+            .catch(() => {
+                // ❗ Autoplay blocked → skip intro gracefully
+                console.warn("Intro autoplay blocked — skipping intro");
+                sessionStorage.setItem("introPlayed", "true");
+                revealUI();
+            });
+    }
 }
 
-/* Skip if already played (desktop only) */
+/* Main logic */
 if (sessionStorage.getItem("introPlayed")) {
-    intro.style.display = "none";
-
-    fadeOrder.forEach((el, i) => {
-        setTimeout(() => {
-            el.classList.remove("hidden");
-            el.classList.add("fade-in");
-        }, i * 100);
-    });
-
+    revealUI();
 } else {
     playIntro();
 
-    introVideo.onended = () => {
-        sessionStorage.setItem("introPlayed", "true");
-
-        intro.style.opacity = 0;
-        setTimeout(() => intro.style.display = "none", 700);
-
-        fadeOrder.forEach((el, i) => {
-            setTimeout(() => {
-                el.classList.remove("hidden");
-                el.classList.add("fade-in");
-            }, i * 350);
-        });
-    };
+    // Absolute safety timeout (never hang)
+    setTimeout(() => {
+        if (intro.style.display !== "none") {
+            console.warn("Intro timeout fallback");
+            sessionStorage.setItem("introPlayed", "true");
+            revealUI();
+        }
+    }, 4000); // 4s max
 }
+
 
 
 
