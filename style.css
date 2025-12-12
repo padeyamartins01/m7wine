@@ -398,7 +398,7 @@ model-viewer {
     display: flex;
     align-items: center;
     gap: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .service.reverse {
