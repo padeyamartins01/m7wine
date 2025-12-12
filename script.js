@@ -1,4 +1,7 @@
-/* INTRO FADE SEQUENCE */
+/* -------------------------------------------------
+   INTRO FADE SEQUENCE — PLAY ONCE PER SESSION
+------------------------------------------------- */
+
 const intro = document.getElementById("intro-container");
 const introVideo = document.getElementById("introVideo");
 
@@ -12,21 +15,37 @@ const fadeOrder = [
     document.getElementById("hamburger")
 ];
 
-introVideo.onended = () => {
-    intro.style.opacity = 0;
-    setTimeout(() => intro.style.display = "none", 700);
+// If intro already played this session → skip it
+if (sessionStorage.getItem("introPlayed")) {
+    intro.style.display = "none";
 
+    // Immediately reveal UI in correct order
     fadeOrder.forEach((el, index) => {
         setTimeout(() => {
             el.classList.remove("hidden");
             el.classList.add("fade-in");
-        }, index * 350);
+        }, index * 100);
     });
-};
+} else {
+    // First visit → play intro
+    introVideo.onended = () => {
+        sessionStorage.setItem("introPlayed", "true");
 
-/* --------------------------------------------------------- */
-/* 🔥 HOME VIDEO DESKTOP / MOBILE SWITCH                     */
-/* --------------------------------------------------------- */
+        intro.style.opacity = 0;
+        setTimeout(() => intro.style.display = "none", 700);
+
+        fadeOrder.forEach((el, index) => {
+            setTimeout(() => {
+                el.classList.remove("hidden");
+                el.classList.add("fade-in");
+            }, index * 350);
+        });
+    };
+}
+
+/* ---------------------------------------------------------
+   🔥 HOME VIDEO DESKTOP / MOBILE SWITCH
+--------------------------------------------------------- */
 
 const homeVideo = document.querySelector(".home-bg-video");
 
@@ -38,7 +57,6 @@ if (homeVideo) {
         const isMobile = window.innerWidth <= 900;
         const correctSrc = isMobile ? mobileVersion : desktopVersion;
 
-        // Only change if needed (prevents reload loops)
         if (homeVideo.src.includes(correctSrc)) return;
 
         homeVideo.innerHTML = `
@@ -49,10 +67,7 @@ if (homeVideo) {
         homeVideo.play();
     }
 
-    // Run on load
     setHomeVideoSource();
-
-    // Run if user rotates phone or resizes window
     window.addEventListener("resize", setHomeVideoSource);
 }
 
@@ -132,9 +147,9 @@ pages.forEach(page => {
     observer.observe(page);
 });
 
-/* --------------------------------------------------------- */
-/* 🔥 3D MODEL – DRAG TO ROTATE Z AXIS ONLY                  */
-/* --------------------------------------------------------- */
+/* ---------------------------------------------------------
+   🔥 3D MODEL – DRAG TO ROTATE Z AXIS ONLY
+--------------------------------------------------------- */
 
 const bottleModel = document.getElementById("bottleModel");
 
@@ -144,7 +159,6 @@ if (bottleModel) {
     let lastX = 0;
     let rotationZ = 0;
 
-    /* Mouse down */
     bottleModel.addEventListener("mousedown", (e) => {
         dragging = true;
         lastX = e.clientX;
@@ -157,13 +171,11 @@ if (bottleModel) {
 
         const dx = e.clientX - lastX;
         lastX = e.clientX;
-
         rotationZ += dx * 0.5;
 
         bottleModel.style.transform = `rotateZ(${rotationZ}deg)`;
     });
 
-    /* Touch start */
     bottleModel.addEventListener("touchstart", (e) => {
         dragging = true;
         lastX = e.touches[0].clientX;
@@ -176,9 +188,31 @@ if (bottleModel) {
 
         const dx = e.touches[0].clientX - lastX;
         lastX = e.touches[0].clientX;
-
         rotationZ += dx * 0.5;
 
         bottleModel.style.transform = `rotateZ(${rotationZ}deg)`;
     });
 }
+
+/* ----------------------------------
+   SERVICE HOVER LABEL FOLLOW
+---------------------------------- */
+
+const hoverLabel = document.getElementById("hover-label");
+const serviceThumbs = document.querySelectorAll(".service-thumb");
+
+serviceThumbs.forEach(thumb => {
+    thumb.addEventListener("mouseenter", () => {
+        hoverLabel.textContent = thumb.dataset.label;
+        hoverLabel.style.opacity = 1;
+    });
+
+    thumb.addEventListener("mouseleave", () => {
+        hoverLabel.style.opacity = 0;
+    });
+
+    thumb.addEventListener("mousemove", (e) => {
+        hoverLabel.style.left = e.clientX + "px";
+        hoverLabel.style.top = e.clientY + "px";
+    });
+});
