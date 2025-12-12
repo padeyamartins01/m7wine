@@ -5,12 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Services | M7 Wine</title>
 
-  <!-- Reuse your main stylesheet -->
+  <!-- Main site styles -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Page-specific styles -->
+  <!-- Font Awesome (footer icons only) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+
+  <!-- Page-specific + footer styles -->
   <style>
-    /* Enable vertical scrolling */
     body.scroll-page {
       overflow-y: auto;
       overflow-x: hidden;
@@ -18,7 +23,7 @@
       color: white;
     }
 
-    /* Simple header */
+    /* Header */
     .services-header {
       padding: 40px 60px;
       font-size: 1.2rem;
@@ -43,7 +48,7 @@
       gap: 140px;
     }
 
-    /* Individual service section */
+    /* Service section */
     .service {
       display: flex;
       align-items: center;
@@ -78,6 +83,51 @@
       max-width: 520px;
     }
 
+    /* FOOTER */
+    .site-footer {
+      margin-top: 140px;
+      padding: 60px 6vw 40px;
+      background: #111;
+      color: white;
+    }
+
+    .site-footer hr {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      margin: 30px 0;
+    }
+
+    .footer-center {
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer-center img {
+      max-width: 160px;
+      opacity: 0.9;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+
+    .footer-social a {
+      color: white;
+      margin-left: 18px;
+      font-size: 1.2rem;
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
+      text-decoration: none;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+    }
+
     /* Mobile */
     @media (max-width: 900px) {
       .services-header {
@@ -102,13 +152,23 @@
       .service img {
         height: 300px;
       }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+
+      .footer-social a {
+        margin: 0 12px;
+      }
     }
   </style>
 </head>
 
 <body class="scroll-page">
 
-  <!-- Simple back navigation -->
+  <!-- Back navigation -->
   <header class="services-header">
     <a href="index.html">← HOME</a>
   </header>
@@ -121,8 +181,7 @@
         <h2>DTC SHIPPING</h2>
         <p>
           Our experienced team members process, verify, and pack daily and club
-          shipments with meticulous attention to detail to ensure every package
-          goes out as planned.
+          shipments with meticulous attention to detail.
         </p>
       </div>
     </section>
@@ -132,8 +191,8 @@
       <div class="service-content">
         <h2>INTERNATIONAL SHIPPING</h2>
         <p>
-          Our international shipping specialists guide you through the process
-          and regulations required for successful global deliveries.
+          Our international shipping specialists guide you through the
+          regulations required for successful global deliveries.
         </p>
       </div>
     </section>
@@ -144,7 +203,7 @@
         <h2>DISTRIBUTION</h2>
         <p>
           We work in close collaboration with you and your carriers to ensure
-          bulk orders are processed quickly and efficiently.
+          bulk orders are processed efficiently.
         </p>
       </div>
     </section>
@@ -154,8 +213,7 @@
       <div class="service-content">
         <h2>LIVIRI VINO SHIPPERS</h2>
         <p>
-          Reusable insulated wine shippers with vacuum panels and ice packs
-          provide 5+ days of thermal protection for a superior DTC experience.
+          Reusable insulated wine shippers provide 5+ days of thermal protection.
         </p>
       </div>
     </section>
@@ -165,8 +223,7 @@
       <div class="service-content">
         <h2>GREEN CELL FOAM</h2>
         <p>
-          Made from US-grown corn, Green Cell Foam is compostable, dissolvable,
-          and provides exceptional cushioning while protecting the planet.
+          Compostable, dissolvable packaging made from US-grown corn.
         </p>
       </div>
     </section>
@@ -176,13 +233,48 @@
       <div class="service-content">
         <h2>VINUM55 DOOR TO DOOR DELIVERY</h2>
         <p>
-          Premium refrigerated concierge-style wine delivery available in select
-          metropolitan areas of Arizona and Texas.
+          Premium refrigerated concierge-style wine delivery.
         </p>
       </div>
     </section>
 
   </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+
+    <div class="footer-center">
+      <img
+        src="https://www.m7wine.com/wp-content/themes/WordPress/assets/images/M7_Only_Invert.webp"
+        alt="M7 Wine Solutions logo"
+      />
+    </div>
+
+    <hr />
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © M7 Wine Solutions Inc, 2022
+      </div>
+
+      <div class="footer-social">
+        <a
+          href="https://www.facebook.com/m7wine/"
+          target="_blank"
+          aria-label="M7 Wine on Facebook"
+          class="fa fa-facebook">
+        </a>
+
+        <a
+          href="https://www.instagram.com/m7wine/?hl=en"
+          target="_blank"
+          aria-label="M7 Wine on Instagram"
+          class="fa fa-instagram">
+        </a>
+      </div>
+    </div>
+
+  </footer>
 
 </body>
 </html>
