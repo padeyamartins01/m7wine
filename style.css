@@ -658,6 +658,16 @@ model-viewer {
     .about-us-text {
         font-size: 1.5rem;
     }
+
+    .about-us-text,
+    .about-us-text p,
+    .about-us-text em {
+        max-width: 90vw;
+         width: 100%;
+        margin: 0 auto;
+        white-space: normal;
+        word-break: normal;
+    }
 }
 
 /* SERVICES HEADER — HARD RESET */
