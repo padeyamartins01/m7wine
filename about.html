@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | M7 Wine</title>
+
+  <!-- Main site styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Font Awesome (footer icons only) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+
+  <style>
+    body.scroll-page {
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: #111;
+      color: white;
+    }
+
+    /* Header */
+    .services-header {
+      padding: 40px 60px;
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+    }
+
+    .services-header a {
+      color: white;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    .services-header a:hover {
+      opacity: 1;
+    }
+
+    /* Page container */
+    .services-page {
+      padding: 60px 8vw 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 120px;
+    }
+
+    /* Team section */
+    .team-section {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      padding-top: 40px;
+      position: relative;
+    }
+
+    /* Subtle divider */
+    .team-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 120px;
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+      transform: translateX(-50%);
+    }
+
+    .team-section:first-child::before {
+      display: none;
+    }
+
+    .team-section h2 {
+      font-size: 2.3rem;
+      letter-spacing: 4px;
+      margin-bottom: 25px;
+      font-weight: 300;
+    }
+
+    .team-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    .team-section li {
+      font-size: 1.4rem;
+      line-height: 1.8;
+      opacity: 0.85;
+    }
+
+    .team-section a {
+      color: white;
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .team-section a:hover {
+      opacity: 1;
+    }
+
+    .team-contact {
+      margin-top: 18px;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      opacity: 0.75;
+    }
+
+    /* Footer */
+    .site-footer {
+      margin-top: 0;
+      padding: 60px 6vw 40px;
+      background: #111;
+      color: white;
+    }
+
+    .site-footer hr {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      margin: 30px 0;
+    }
+
+    .footer-center {
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer-center img {
+      max-width: 160px;
+      opacity: 0.9;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+
+    .footer-social a {
+      color: white;
+      margin-left: 18px;
+      font-size: 1.2rem;
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
+      text-decoration: none;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .services-header {
+        padding: 30px;
+      }
+
+      .services-page {
+        padding: 40px 6vw 100px;
+        gap: 90px;
+      }
+
+      .team-section h2 {
+        font-size: 1.9rem;
+      }
+
+      .team-section li {
+        font-size: 1.2rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+
+      .footer-social a {
+        margin: 0 12px;
+      }
+    }
+  </style>
+</head>
+
+<body class="scroll-page">
+
+  <!-- Back navigation -->
+  <header class="services-header">
+    <a href="index.html">← HOME</a>
+  </header>
+
+  <main class="services-page">
+
+    <section class="team-section">
+      <h2>ORDER PROCESSING</h2>
+      <ul>
+        <li>Andrea Sherman | Accounts Manager</li>
+        <li>Eva Castro | Winery Will Call &amp; Distribution</li>
+      </ul>
+      <div class="team-contact">
+        <a href="mailto:orders@m7wine.com">CONTACT US</a>
+      </div>
+    </section>
+
+    <section class="team-section">
+      <h2>CUSTOMER CARE</h2>
+      <ul>
+        <li>Stormie Blevins | Customer Will Calls</li>
+        <li>Jen Aileen Pantaleon | Claims &amp; Returns</li>
+      </ul>
+      <div class="team-contact">
+        <a href="mailto:customercare@m7wine.com">CONTACT US</a>
+      </div>
+    </section>
+
+    <section class="team-section">
+      <h2>WAREHOUSE &amp; INVENTORY</h2>
+      <ul>
+        <li>Jaime Godinez | Warehouse Manager</li>
+        <li>Jose Ramirez | Inventory Manager</li>
+      </ul>
+      <div class="team-contact">
+        <a href="mailto:inventory@m7wine.com">CONTACT US</a>
+      </div>
+    </section>
+
+    <section class="team-section">
+      <h2>SPECIALTY SERVICES</h2>
+      <ul>
+        <li><a href="mailto:jennifer@m7wine.com">Jennifer Pitman</a> | Transportation &amp; International Shipping</li>
+        <li><a href="mailto:DeeDee@m7wine.com">DeeDee Barrera</a> | Specialty Projects</li>
+        <li><a href="mailto:melissa@m7wine.com">Melissa Aquila</a> | Billing &amp; Administration</li>
+      </ul>
+    </section>
+
+    <section class="team-section">
+      <h2>EXECUTIVE TEAM</h2>
+      <ul>
+        <li><a href="mailto:chris@m7wine.com">Chris Sweetanos</a> | Chief Executive Officer</li>
+        <li><a href="mailto:mspencer@m7wine.com">Melissa Spencer</a> | Vice President, Operations</li>
+        <li><a href="mailto:jarod@m7wine.com">Jarod Sproule</a> | Director of Production</li>
+        <li><a href="mailto:josh@m7wine.com">Josh Hart</a> | Director of Communications</li>
+        <li><a href="mailto:apenley@m7wine.com">Andrea Penley</a> | Customer Experience Director</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-center">
+      <img
+        src="https://www.m7wine.com/wp-content/themes/WordPress/assets/images/M7_Only_Invert.webp"
+        alt="M7 Wine Solutions logo"
+      />
+    </div>
+
+    <hr />
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © M7 Wine Solutions Inc, 2022
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.facebook.com/m7wine/" target="_blank" class="fa fa-facebook"></a>
+        <a href="https://www.instagram.com/m7wine/?hl=en" target="_blank" class="fa fa-instagram"></a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
