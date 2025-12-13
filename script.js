@@ -185,6 +185,11 @@ document.querySelectorAll(".menu-item").forEach((item, i) => {
    ABOUT SECTION SCROLL + TYPE (hooks into SAME observer)
 --------------------------------------------------------- */
 
+function isMobile() {
+    return window.innerWidth <= 900;
+}
+
+
 const aboutSection = document.querySelector("#about-us");
 const aboutHeader = document.querySelector(".about-header");
 const aboutEm = document.querySelector(".about-us-text p em");
@@ -236,6 +241,14 @@ function playAboutAnimation() {
 
     if (aboutHeader) aboutHeader.classList.add("fade-in");
 
+    // 🔹 MOBILE: fade whole paragraph
+    if (isMobile()) {
+        aboutEm.style.transition = "opacity 0.9s ease";
+        aboutEm.style.opacity = 1;
+        return;
+    }
+
+    // 🔹 DESKTOP: line-by-line
     const lines = document.querySelectorAll(".about-line");
     lines.forEach((line, i) => {
         setTimeout(() => {
@@ -246,17 +259,25 @@ function playAboutAnimation() {
 
 // Prepare About text split ONLY if About exists
 if (aboutSection && aboutEm) {
-    // Delay splitting until layout is ready so widths are accurate
-    requestAnimationFrame(() => {
-        splitTextIntoLines(aboutEm);
-    });
 
-    // Re-split on resize (responsive)
-    window.addEventListener("resize", () => {
-        aboutPlayed = false; // allow re-run after resize if you want
-        splitTextIntoLines(aboutEm);
-    });
+    if (!isMobile()) {
+        // DESKTOP: split into lines
+        requestAnimationFrame(() => {
+            splitTextIntoLines(aboutEm);
+        });
+
+        window.addEventListener("resize", () => {
+            if (!isMobile()) {
+                aboutPlayed = false;
+                splitTextIntoLines(aboutEm);
+            }
+        });
+    } else {
+        // MOBILE: ensure clean text + hidden start
+        aboutEm.style.opacity = 0;
+    }
 }
+
 
 /* ---------------------------------------------------------
    FADE IN SECTIONS WHEN VISIBLE (SINGLE OBSERVER)
@@ -383,4 +404,3 @@ function bindMobileThumbCaptions() {
 if (window.innerWidth <= 900) {
     bindMobileThumbCaptions();
 }
-
