@@ -1,4 +1,3 @@
-
 /* -------------------------------------------------
    INTRO — PREVENT FLASH ON RELOAD
 ------------------------------------------------- */
@@ -28,6 +27,7 @@ function revealUI(immediate = false) {
     }
 
     fadeOrder.forEach((el, i) => {
+        if (!el) return;
         setTimeout(() => {
             el.classList.remove("hidden");
             el.classList.add("fade-in");
@@ -57,7 +57,7 @@ else {
         const isMobile = window.innerWidth <= 900;
         const correctSrc = isMobile ? introMobileSrc : introDesktopSrc;
 
-        if (introVideo.currentSrc.includes(correctSrc)) return;
+        if (introVideo.currentSrc && introVideo.currentSrc.includes(correctSrc)) return;
 
         introVideo.innerHTML = `
             <source src="${correctSrc}" type="video/mp4">
@@ -75,11 +75,6 @@ else {
     window.addEventListener("resize", setIntroVideoSource);
 }
 
-
-
-
-
-
 /* ---------------------------------------------------------
    🔥 HOME VIDEO DESKTOP / MOBILE SWITCH
 --------------------------------------------------------- */
@@ -94,14 +89,16 @@ if (homeVideo) {
         const isMobile = window.innerWidth <= 900;
         const correctSrc = isMobile ? mobileVersion : desktopVersion;
 
-        if (homeVideo.src.includes(correctSrc)) return;
+        if (homeVideo.currentSrc && homeVideo.currentSrc.includes(correctSrc)) return;
 
         homeVideo.innerHTML = `
             <source src="${correctSrc}" type="video/mp4">
         `;
 
         homeVideo.load();
-        homeVideo.play();
+        // play() can throw if user hasn't interacted; safe-guard it
+        const p = homeVideo.play();
+        if (p && typeof p.catch === "function") p.catch(() => {});
     }
 
     setHomeVideoSource();
@@ -109,26 +106,35 @@ if (homeVideo) {
 }
 
 /* PICKUP DROPDOWN */
-pickupBtn.onclick = () => {
-    pickupDropdown.style.display =
-        pickupDropdown.style.display === "flex" ? "none" : "flex";
-};
+const pickupBtn = document.getElementById("pickupBtn");
+const pickupDropdown = document.getElementById("pickupDropdown");
+
+if (pickupBtn && pickupDropdown) {
+    pickupBtn.onclick = () => {
+        pickupDropdown.style.display =
+            pickupDropdown.style.display === "flex" ? "none" : "flex";
+    };
+}
 
 /* HORIZONTAL SCROLL (DESKTOP) */
 const wrapper = document.getElementById("pagesWrapper");
 
-wrapper.addEventListener("wheel", (e) => {
-    if (window.innerWidth > 900) {
-        e.preventDefault();
-        wrapper.scrollLeft += e.deltaY;
-    }
-}, { passive: false });
+if (wrapper) {
+    wrapper.addEventListener("wheel", (e) => {
+        if (window.innerWidth > 900) {
+            e.preventDefault();
+            wrapper.scrollLeft += e.deltaY;
+        }
+    }, { passive: false });
+}
 
 /* DOT INDICATORS */
 const pages = document.querySelectorAll(".page");
 const dots = document.querySelectorAll(".dot");
 
 function updateDots() {
+    if (!wrapper) return;
+
     let index;
 
     if (window.innerWidth > 900) {
@@ -140,16 +146,25 @@ function updateDots() {
     dots.forEach((d, i) => d.classList.toggle("active", i === index));
 }
 
-wrapper.addEventListener("scroll", updateDots);
+if (wrapper) {
+    wrapper.addEventListener("scroll", updateDots);
+}
 
 /* HAMBURGER MENU */
-hamburger.onclick = () => {
-    sidebar.classList.toggle("open");
-};
+const hamburger = document.getElementById("hamburger");
+const sidebar = document.getElementById("sidebar");
+
+if (hamburger && sidebar) {
+    hamburger.onclick = () => {
+        sidebar.classList.toggle("open");
+    };
+}
 
 /* MENU LINKS NAVIGATION */
 document.querySelectorAll(".menu-item").forEach((item, i) => {
     item.onclick = () => {
+        if (!wrapper) return;
+
         if (window.innerWidth > 900) {
             wrapper.scrollTo({
                 left: i * wrapper.clientWidth,
@@ -162,27 +177,119 @@ document.querySelectorAll(".menu-item").forEach((item, i) => {
             });
         }
 
-        sidebar.classList.remove("open");
+        if (sidebar) sidebar.classList.remove("open");
     };
 });
 
-/* FADE IN SECTIONS WHEN VISIBLE */
+/* ---------------------------------------------------------
+   ABOUT SECTION SCROLL + TYPE (hooks into SAME observer)
+--------------------------------------------------------- */
+
+const aboutSection = document.querySelector("#about-us");
+const aboutHeader = document.querySelector(".about-header");
+const aboutEm = document.querySelector(".about-us-text p em");
+
+let aboutPlayed = false;
+
+function splitTextIntoLines(element) {
+    const text = element.innerText.trim();
+    element.innerHTML = "";
+
+    // Create a measuring span to prevent "offsetWidth is 0" issues
+    const measurer = document.createElement("span");
+    measurer.style.visibility = "hidden";
+    measurer.style.position = "absolute";
+    measurer.style.whiteSpace = "nowrap";
+    measurer.style.pointerEvents = "none";
+    document.body.appendChild(measurer);
+
+    const words = text.split(/\s+/);
+    let line = document.createElement("span");
+    line.className = "about-line";
+    line.style.opacity = 0;
+    element.appendChild(line);
+
+    words.forEach((word) => {
+        const current = line.innerText;
+        const next = (current + " " + word).trim();
+
+        measurer.innerText = next;
+
+        // wrap when line exceeds container width
+        if (measurer.offsetWidth > element.offsetWidth && current.length > 0) {
+            line = document.createElement("span");
+            line.className = "about-line";
+            line.style.opacity = 0;
+            line.innerText = word;
+            element.appendChild(line);
+        } else {
+            line.innerText = next;
+        }
+    });
+
+    document.body.removeChild(measurer);
+}
+
+function playAboutAnimation() {
+    if (aboutPlayed) return;
+    aboutPlayed = true;
+
+    if (aboutHeader) aboutHeader.classList.add("fade-in");
+
+    const lines = document.querySelectorAll(".about-line");
+    lines.forEach((line, i) => {
+        setTimeout(() => {
+            line.style.opacity = 1;
+        }, i * 350);
+    });
+}
+
+// Prepare About text split ONLY if About exists
+if (aboutSection && aboutEm) {
+    // Delay splitting until layout is ready so widths are accurate
+    requestAnimationFrame(() => {
+        splitTextIntoLines(aboutEm);
+    });
+
+    // Re-split on resize (responsive)
+    window.addEventListener("resize", () => {
+        aboutPlayed = false; // allow re-run after resize if you want
+        splitTextIntoLines(aboutEm);
+    });
+}
+
+/* ---------------------------------------------------------
+   FADE IN SECTIONS WHEN VISIBLE (SINGLE OBSERVER)
+--------------------------------------------------------- */
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
+        if (!entry.isIntersecting) return;
+
+        // default fade-in behavior
+        entry.target.classList.add("visible");
+
+        // trigger about typing once About section comes into view
+        if (aboutSection && entry.target === aboutSection) {
+            playAboutAnimation();
         }
     });
 }, { threshold: 0.35 });
 
+// Observe pages + children
 pages.forEach(page => {
     page.classList.add("fade-section");
+
     page.querySelectorAll("*").forEach(child => {
         child.classList.add("fade-section");
         observer.observe(child);
     });
+
     observer.observe(page);
 });
+
+// Observe About section specifically (for typing trigger)
+if (aboutSection) observer.observe(aboutSection);
 
 /* ---------------------------------------------------------
    🔥 3D MODEL – DRAG TO ROTATE Z AXIS ONLY
@@ -238,41 +345,42 @@ if (bottleModel) {
 const hoverLabel = document.getElementById("hover-label");
 const serviceThumbs = document.querySelectorAll(".service-thumb");
 
-serviceThumbs.forEach(thumb => {
-    thumb.addEventListener("mouseenter", () => {
-        hoverLabel.textContent = thumb.dataset.label;
-        hoverLabel.style.opacity = 1;
-    });
+if (hoverLabel && serviceThumbs.length) {
+    serviceThumbs.forEach(thumb => {
+        thumb.addEventListener("mouseenter", () => {
+            hoverLabel.textContent = thumb.dataset.label || "";
+            hoverLabel.style.opacity = 1;
+        });
 
-    thumb.addEventListener("mouseleave", () => {
-        hoverLabel.style.opacity = 0;
-    });
+        thumb.addEventListener("mouseleave", () => {
+            hoverLabel.style.opacity = 0;
+        });
 
-    thumb.addEventListener("mousemove", (e) => {
-        hoverLabel.style.left = e.clientX + "px";
-        hoverLabel.style.top = e.clientY + "px";
+        thumb.addEventListener("mousemove", (e) => {
+            hoverLabel.style.left = e.clientX + "px";
+            hoverLabel.style.top = e.clientY + "px";
+        });
     });
-});
+}
 
 /* ----------------------------------
    MOBILE SERVICE THUMB TAP CAPTIONS
 ---------------------------------- */
 
-if (window.innerWidth <= 900) {
-  const thumbs = document.querySelectorAll(".service-thumb");
+function bindMobileThumbCaptions() {
+    const thumbs = document.querySelectorAll(".service-thumb");
 
-  thumbs.forEach(thumb => {
-    thumb.addEventListener("click", () => {
-
-      // Close any other open captions
-      thumbs.forEach(t => {
-        if (t !== thumb) t.classList.remove("active");
-      });
-
-      // Toggle current
-      thumb.classList.toggle("active");
+    thumbs.forEach(thumb => {
+        thumb.addEventListener("click", () => {
+            thumbs.forEach(t => {
+                if (t !== thumb) t.classList.remove("active");
+            });
+            thumb.classList.toggle("active");
+        });
     });
-  });
 }
 
+if (window.innerWidth <= 900) {
+    bindMobileThumbCaptions();
+}
 
