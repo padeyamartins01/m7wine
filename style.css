@@ -550,13 +550,8 @@ model-viewer {
         transform: translateX(0);
     }
 
-    .pages-wrapper,
-    .page {
-    height: auto;
-    min-height: 100vh;
-     }
-
     .pages-wrapper {
+        width: 100vw;
         left: 0;
 
         flex-direction: column;
@@ -568,6 +563,9 @@ model-viewer {
 
 
     .page {
+        width: 100vw;
+        height: auto;
+        min-height: 100vh;
         font-size: 2.4rem;
     }
 
