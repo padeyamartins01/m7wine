@@ -10,30 +10,19 @@
 
     <!-- INTRO VIDEO -->
     <div id="intro-container">
-    <video
-    id="introVideo"
-    autoplay
-    muted
-    playsinline
-    webkit-playsinline>
-    <source src="pictures/ani2.mp4" type="video/mp4" />
-</video>
+        <video id="introVideo" autoplay muted playsinline webkit-playsinline>
+            <source src="pictures/ani2.mp4" type="video/mp4" />
+        </video>
+    </div>
 
-</div>
-
-
-    <!-- MOBILE HAMBURGER -->
     <div class="hamburger hidden" id="hamburger">☰</div>
 
-    <!-- LEFT SIDEBAR -->
     <div class="sidebar hidden" id="sidebar">
-
         <div class="pickup-toggle">
             <button id="pickupBtn">
                 SCHEDULE PICKUP 
                 <span class="arrow">></span>
             </button>
-
             <div class="dropdown" id="pickupDropdown">
                 <a href="#">WINERY/CUSTOMER PICK UP</a>
                 <a href="#">DISTRIBUTOR PICK UP</a>
@@ -48,95 +37,69 @@
         </div>
     </div>
 
-    <!-- SOCIAL ICONS -->
     <div class="social-icons hidden">
         <a href="#"><img src="pictures/icons8-facebook-50.png" /></a>
         <a href="#"><img src="pictures/icons8-instagram-50.png" /></a>
     </div>
 
-    <!-- Top Right Login -->
     <div class="top-right-login hidden">CLIENT LOGIN</div>
 
-    <!-- Horizontal Scrolling Pages -->
     <div class="pages-wrapper hidden" id="pagesWrapper">
 
+        <!-- HOME -->
         <section class="page" id="home" style="background:#111;">
-    <div class="page-container">
+            <div class="page-container">
+                <video class="home-bg-video" autoplay muted loop playsinline>
+                    <source src="pictures/STG_flash.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </section>
 
-        <!-- Background Video -->
-        <video class="home-bg-video" autoplay muted loop playsinline>
-            <source src="pictures/STG_flash.mp4" type="video/mp4" />
-        </video>
-    </div>
-</section>
-
-
+        <!-- SERVICES -->
         <section class="page" id="services" style="background:#222;">
-    <div class="page-container services-preview">
-
-        <h1 class="services-title">
-        <a href="services.html">WHAT WE DO</a>
-        </h1>
-
-        <div class="services-float-grid">
-
-            <div class="service-thumb" data-label="DTC SHIPPING">
-                <img src="pictures/services/services-dtc-shipping.jpg">
+            <div class="page-container services-preview">
+                <h1 class="services-title">
+                    <a href="services.html">WHAT WE DO</a>
+                </h1>
+                <div class="services-float-grid">
+                    <div class="service-thumb" data-label="DTC SHIPPING"><img src="pictures/services/services-dtc-shipping.jpg"></div>
+                    <div class="service-thumb" data-label="INTERNATIONAL SHIPPING"><img src="pictures/services/services-international-shipping.jpg"></div>
+                    <div class="service-thumb" data-label="DISTRIBUTION"><img src="pictures/services/services-distribution.jpg"></div>
+                    <div class="service-thumb" data-label="LIVIRI VINO SHIPPERS"><img src="pictures/services/services-liviri.jpg"></div>
+                    <div class="service-thumb" data-label="GREEN CELL FOAM"><img src="pictures/services/services-green-cell.jpg"></div>
+                    <div class="service-thumb" data-label="VINUM55 DELIVERY"><img src="pictures/services/services-vinum55.jpg"></div>
+                </div>
+                <div id="hover-label"></div>
             </div>
+        </section>
 
-            <div class="service-thumb" data-label="INTERNATIONAL SHIPPING">
-                <img src="pictures/services/services-international-shipping.jpg">
-            </div>
-
-            <div class="service-thumb" data-label="DISTRIBUTION">
-                <img src="pictures/services/services-distribution.jpg">
-            </div>
-
-            <div class="service-thumb" data-label="LIVIRI VINO SHIPPERS">
-                <img src="pictures/services/services-liviri.jpg">
-            </div>
-
-            <div class="service-thumb" data-label="GREEN CELL FOAM">
-                <img src="pictures/services/services-green-cell.jpg">
-            </div>
-
-            <div class="service-thumb" data-label="VINUM55 DELIVERY">
-                <img src="pictures/services/services-vinum55.jpg">
-            </div>
-
-</div>
-
-        <!-- floating label -->
-        <div id="hover-label"></div>
-
-
-    </div>
-    </section>
-
-
+        <!-- ABOUT -->
         <section class="page" id="about" style="background:#333;">
             <div class="page-container">
-                <h1>ABOUT</h1>
+                <section id="about-us">
+                    <div class="about-us-outer">
+                        <h1 class="about-header">
+                            <a href="about.html">WHO WE ARE</a>
+                        </h1>
+                        <div class="about-us-text">
+                            <p><em>
+                                At M7, we know that what makes our partners successful is that every winery offers something original, something special; our goal is to carry each unique experience from tasting room to delivery. M7 Wine Solutions isn't merely a fulfillment and logistics provider, rather we're the winery's partner, an extension of the winery.
+                            </em></p>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
 
         <section class="page" id="contact" style="background:#444;">
-            <div class="page-container">
-                <h1>CONTACT</h1>
-            </div>
+            <div class="page-container"><h1>CONTACT</h1></div>
         </section>
-
     </div>
 
-    <!-- Dot Indicators -->
     <div class="dots hidden" id="dots">
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+        <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
 
-    <!-- Circle Button -->
     <div class="circle-btn hidden"></div>
 
     <script src="script.js"></script>
