@@ -546,21 +546,14 @@ model-viewer {
 
 @media (max-width: 900px) {
     .contact-us-outer {
-        max-width: 380px;
+        margin-top: 100px; /* footer + safe area */
     }
+}
 
-    #contact-us-form form {
-        gap: 12px;
-    }
-
-    #contact-us-form input,
-    #contact-us-form textarea {
-        padding: 6px 0;
-    }
-
-    #contact-us-form input[type="submit"] {
-        padding: 10px;
-        margin-top: 20px;
+@media (max-width: 900px) {
+    #contact-us-form {
+        transform: scale(0.95);
+        transform-origin: top center;
     }
 }
 
