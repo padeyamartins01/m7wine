@@ -297,6 +297,25 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.35 });
 
+const contactPage = document.getElementById("contact");
+const contactFooter = document.getElementById("contact-footer");
+
+if (contactPage && contactFooter) {
+    const contactObserver = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+                contactFooter.classList.add("visible");
+            } else {
+                contactFooter.classList.remove("visible");
+            }
+        },
+        { threshold: 0.6 }
+    );
+
+    contactObserver.observe(contactPage);
+}
+
+
 // Observe pages + children
 pages.forEach(page => {
     page.classList.add("fade-section");
