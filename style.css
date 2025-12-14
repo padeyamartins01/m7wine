@@ -560,7 +560,7 @@ model-viewer {
 
 /* Labels — slightly larger */
 #contact-us-form label {
-    font-size: 1.3rem;
+    font-size: 1rem;
     letter-spacing: 2px;
     opacity: 0.85;
 }
