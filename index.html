@@ -91,9 +91,59 @@
             </div>
         </section>
 
-        <section class="page" id="contact" style="background:#444;">
-            <div class="page-container"><h1>CONTACT</h1></div>
+        <section class="page" id="contact">
+    <div class="page-container">
+
+        <section id="contact-us">
+            <div class="contact-us-outer">
+
+                <!-- FORM -->
+                <div id="contact-us-form">
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="36e0f5ba-dbfc-40ad-873c-2a9065d5605c">
+                        <input type="hidden" name="subject" value="Contact Us">
+                        <input type="hidden" name="from_name" value="M7 Wine Solutions">
+                        <input type="hidden" name="redirect" value="https://m7wine.com">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display:none">
+
+                        <label>Name</label>
+                        <input type="text" name="name" required>
+
+                        <label>Email</label>
+                        <input type="email" name="email" required>
+
+                        <label>Phone</label>
+                        <input type="tel" name="phone">
+
+                        <label>Message</label>
+                        <textarea name="message" rows="4"></textarea>
+
+                        <input type="submit" value="SEND">
+                    </form>
+
+                    <!-- QUICK NOTE -->
+                    <p class="contact-note">
+                        For quicker responses, ask our helpbot!
+                    </p>
+                </div>
+
+            </div>
         </section>
+    </div>
+
+    <!-- SLIDE-UP FOOTER (CONTACT ONLY) -->
+    <footer id="contact-footer">
+        <div class="contact-footer-inner">
+            <a href="tel:7076811977">(707) 681-1977</a>
+            <span>•</span>
+            <a href="https://maps.google.com/maps?q=502%20Devlin%20Rd,%20Napa,%20CA%2094558" target="_blank">
+                502 Devlin Road, Napa CA 94558
+            </a>
+        </div>
+    </footer>
+</section>
+
+
     </div>
 
     <div class="dots hidden" id="dots">
