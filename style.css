@@ -546,7 +546,7 @@ model-viewer {
 
 @media (max-width: 900px) {
     .contact-us-outer {
-        margin-bottom: 100px; /* footer + safe area */
+        margin-bottom: 50px; /* footer + safe area */
     }
 }
 
@@ -670,6 +670,7 @@ model-viewer {
 @media (max-width: 900px) {
     #contact-footer {
         height: 100px;
+        margin-bottom: 50px;
     }
 
     .contact-footer-inner {
