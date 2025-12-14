@@ -471,7 +471,6 @@ model-viewer {
     color: white;
     text-decoration: none;
     letter-spacing: 0.15em;
-    font-size: clamp(40px, 5vw, 56px);
     font-weight: 300;
     display: inline-block;
     transition: opacity 0.25s ease;
