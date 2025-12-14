@@ -546,7 +546,7 @@ model-viewer {
 
 /* Labels — slightly larger */
 #contact-us-form label {
-    font-size: 1.05rem;
+    font-size: 1.3rem;
     letter-spacing: 2px;
     opacity: 0.85;
 }
@@ -584,7 +584,7 @@ model-viewer {
 /* Quick note */
 .contact-note {
     margin-top: 22px;
-    font-size: 0.85rem;
+    font-size: 1rem;
     opacity: 0.6;
     letter-spacing: 1px;
     text-align: center;
