@@ -1,3 +1,118 @@
+// -------------------------
+// HELP BOT (PHASE 1: FAQ)
+// -------------------------
+const helpTrigger = document.getElementById("helpbotTrigger");
+const helpHint = document.getElementById("helpHint");
+const overlay = document.getElementById("helpbotOverlay");
+const closeBtn = document.getElementById("helpbotClose");
+const form = document.getElementById("helpbotForm");
+const input = document.getElementById("helpbotInput");
+const messages = document.getElementById("helpbotMessages");
+
+// Basic FAQ placeholder routing
+const FAQS = [
+  {
+    keywords: ["pickup", "schedule", "setmore"],
+    answer: "To schedule a pickup, tap “Schedule Pickup” in the menu and choose the correct pickup type."
+  },
+  {
+    keywords: ["international", "ship internationally"],
+    answer: "Yes — we offer international shipping options depending on destination and compliance requirements."
+  },
+  {
+    keywords: ["dtc", "shipping", "ship", "deliver"],
+    answer: "We support DTC shipping and delivery solutions. If you share your winery + destination state, I can point you to the best option."
+  },
+  {
+    keywords: ["contact", "customer service", "support", "help"],
+    answer: "If this needs a human, use the Contact page form — and for urgent matters, call the number shown in the Contact footer."
+  }
+];
+
+function addMsg(text, type) {
+  const div = document.createElement("div");
+  div.className = type === "user" ? "user-message" : "bot-message";
+  div.textContent = text;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function respond(text) {
+  const lower = text.toLowerCase();
+  const match = FAQS.find(f => f.keywords.some(k => lower.includes(k)));
+  addMsg(
+    match ? match.answer : "I can help with quick questions (pickups, shipping, services). If it’s account-specific, use CLIENT LOGIN or the Contact form.",
+    "bot"
+  );
+}
+
+function closeHelpbot() {
+  overlay.classList.remove("open");
+  overlay.setAttribute("aria-hidden", "true");
+}
+
+function showHelpHint() {
+  // TEMP: comment this out while debugging
+  // if (localStorage.getItem("help_hint_seen") === "1") return;
+
+  // ensure button is visible
+  helpTrigger.classList.remove("hidden");
+  helpTrigger.classList.add("fade-in", "pulse", "wobble");
+
+  // 🔑 CRITICAL FIX
+  helpHint.classList.remove("hidden");
+
+  requestAnimationFrame(() => {
+    helpHint.classList.add("show");
+  });
+
+  setTimeout(() => hideHelpHint(), 4500);
+  setTimeout(() => {
+  localStorage.setItem("help_hint_seen", "1");
+    }, 600);
+}
+
+
+function openHelpbot() {
+  overlay.classList.add("open");
+  overlay.setAttribute("aria-hidden", "false");
+  helpTrigger.classList.remove("pulse", "wobble");
+  hideHelpHint(true);
+  setTimeout(() => input?.focus(), 150);
+}
+
+
+
+function hideHelpHint(force = false) {
+  if (!force && !helpHint.classList.contains("show")) return;
+  helpHint.classList.remove("show");
+  // keep it in DOM but visually off (matches your pattern)
+  setTimeout(() => helpHint.classList.add("hidden"), 250);
+}
+
+helpTrigger?.addEventListener("click", openHelpbot);
+closeBtn?.addEventListener("click", closeHelpbot);
+
+// close when clicking outside the sheet
+overlay?.addEventListener("click", (e) => {
+  if (e.target === overlay) closeHelpbot();
+});
+
+// ESC to close
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeHelpbot();
+});
+
+// handle chat submits
+form?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const text = input.value.trim();
+  if (!text) return;
+  addMsg(text, "user");
+  input.value = "";
+  setTimeout(() => respond(text), 350);
+});
+
 /* -------------------------------------------------
    INTRO — PREVENT FLASH ON RELOAD
 ------------------------------------------------- */
@@ -19,6 +134,9 @@ const fadeOrder = [
 ];
 
 function revealUI(immediate = false) {
+    // 🔑 CRITICAL FIX
+    intro.style.pointerEvents = "none";
+
     if (immediate) {
         intro.style.display = "none";
     } else {
@@ -35,6 +153,7 @@ function revealUI(immediate = false) {
     });
 }
 
+
 /* -------------------------------------------------
    SKIP INTRO (NO FLASH)
 ------------------------------------------------- */
@@ -47,6 +166,11 @@ if (sessionStorage.getItem("introPlayed")) {
     introVideo.innerHTML = "";
 
     revealUI(true); // immediate, no fade
+
+    // 🔔 SHOW HELP HINT ON RETURN VISITS
+    setTimeout(() => {
+        showHelpHint();
+    }, 500);
 }
 
 /* -------------------------------------------------
@@ -70,6 +194,7 @@ else {
     introVideo.onended = () => {
         sessionStorage.setItem("introPlayed", "true");
         revealUI();
+        showHelpHint();
     };
 
     window.addEventListener("resize", setIntroVideoSource);
@@ -423,3 +548,6 @@ function bindMobileThumbCaptions() {
 if (window.innerWidth <= 900) {
     bindMobileThumbCaptions();
 }
+
+
+
