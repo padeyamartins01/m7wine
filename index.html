@@ -162,8 +162,41 @@
         <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
 
-    <div class="circle-btn hidden"></div>
+    <div class="circle-btn hidden" id="helpbotTrigger">
+        <img src="pictures/bot.svg" alt="Help" />
+    </div>
 
-    <script src="script.js"></script>
+
+    <!-- HELP HINT BUBBLE -->
+<div id="helpHint" class="help-hint hidden">
+  Tap for help
+  <span class="help-hint-arrow"></span>
+</div>
+
+<!-- HELP BOT OVERLAY -->
+<div id="helpbotOverlay" class="helpbot-overlay" aria-hidden="true">
+  <div class="helpbot-sheet" role="dialog" aria-label="Help chat">
+    <div class="helpbot-header">
+      <div class="helpbot-title">M7 Help</div>
+      <button id="helpbotClose" class="helpbot-close" aria-label="Close">×</button>
+    </div>
+
+    <div id="helpbotMessages" class="helpbot-messages">
+      <div class="bot-message">
+        Hi — I can help with pickups, shipping, and quick questions.
+      </div>
+      <div class="bot-message">
+        Try: “How do I schedule a pickup?” or “Do you ship internationally?”
+      </div>
+    </div>
+
+    <form id="helpbotForm" class="helpbot-input">
+      <input id="helpbotInput" type="text" placeholder="Ask a question…" autocomplete="off" />
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
