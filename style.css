@@ -311,6 +311,35 @@ model-viewer {
     opacity: 0.7;
 }
 
+.social-icons i {
+    color: white;
+    transition: opacity 0.2s ease;
+}
+
+.social-icons i:hover {
+    opacity: 0.7;
+}
+
+.social-icons a {
+    font-size: 2.4rem; /* adjust to taste: 2.2–2.8rem works well */
+}
+
+
+@media (max-width: 900px) {
+    .social-icons {
+        top: 25px;
+        bottom: auto;
+        left: 25px;
+
+        padding-top: env(safe-area-inset-top);
+        gap: 14px;
+    }
+
+    .social-icons a {
+        font-size: 1.4rem;
+    }
+}
+
 /* SERVICES PREVIEW (HOME) */
 #services .services-preview {
     justify-content: center;
