@@ -398,8 +398,8 @@ model-viewer {
 @media (max-width: 900px) {
 
   .help-hint {
-    bottom: 70px;               /* closer to button */
-    right: 20px;                /* match button */
+    bottom: 80px;               /* closer to button */
+    right: 15px;                /* match button */
     padding: 8px 10px;
 
     font-size: 0.75rem;
