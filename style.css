@@ -392,6 +392,33 @@ model-viewer {
   transform: rotate(45deg);
 }
 
+/* ===============================
+   MOBILE HELP HINT FIX
+=============================== */
+@media (max-width: 900px) {
+
+  .help-hint {
+    bottom: 70px;               /* closer to button */
+    right: 20px;                /* match button */
+    padding: 8px 10px;
+
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+
+    max-width: 160px;
+    text-align: center;
+  }
+
+  .help-hint-arrow {
+    right: 22px;                /* centers arrow above circle */
+    bottom: -7px;
+
+    width: 10px;
+    height: 10px;
+  }
+}
+
+
 /* HELP BOT OVERLAY */
 .helpbot-overlay {
   position: fixed;
