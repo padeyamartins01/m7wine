@@ -39,11 +39,13 @@ body {
 /* ELEMENT HIDDEN BY DEFAULT */
 .hidden {
     opacity: 0;
+    pointer-events: none;
 }
 
 /* FADE IN ANIMATION */
 .fade-in {
     animation: fadeIn 1s ease forwards;
+    pointer-events: auto;
 }
 
 @keyframes fadeIn {
@@ -279,16 +281,217 @@ model-viewer {
 }
 
 /* CIRCLE BUTTON */
+/* CIRCLE BUTTON (HELP) */
+/* ===============================
+   HELP BOT BUTTON — REFINED STYLE
+=============================== */
+
 .circle-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background: white;
-    border-radius: 50%;
-    z-index: 40;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+  background: white;
+  border: 3px solid black;
+
+  z-index: 140;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 0 0 1px white inset,
+    0 6px 16px rgba(0,0,0,0.35);
+
+  transform-origin: center;
 }
+
+/* Chat glyph */
+.circle-btn::before {
+  color: black;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  transform: translateY(-1px);
+}
+
+/* Idle wobble (only when closed) */
+.circle-btn.wobble {
+  animation: helpWobble 3.2s ease-in-out infinite;
+}
+
+@keyframes helpWobble {
+  0%   { transform: rotate(0deg) scale(1); }
+  5%   { transform: rotate(-6deg) scale(1.02); }
+  10%  { transform: rotate(6deg) scale(1.02); }
+  15%  { transform: rotate(-4deg) scale(1.01); }
+  20%  { transform: rotate(4deg) scale(1.01); }
+  25%  { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.circle-btn img {
+  width: 32px;
+  height: 32px;
+  pointer-events: none; /* 🔑 important */
+}
+
+
+
+/* Pulse animation class (enabled after intro) */
+.circle-btn.pulse {
+  animation: helpPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes helpPulse {
+  0%   { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.25); }
+  50%  { transform: scale(1.04); box-shadow: 0 0 0 10px rgba(255,255,255,0.06); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+
+/* HELP HINT BUBBLE */
+.help-hint {
+  position: fixed;
+  bottom: 95px;
+  right: 30px;
+
+  background: black;
+  border: 1px solid white;
+  padding: 10px 12px;
+
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+
+  z-index: 145;
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.help-hint.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.help-hint-arrow {
+  position: absolute;
+  bottom: -8px;
+  right: 18px;
+  width: 12px;
+  height: 12px;
+  background: black;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  transform: rotate(45deg);
+}
+
+/* HELP BOT OVERLAY */
+.helpbot-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+
+  background: rgba(0,0,0,0.75);
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.25s ease;
+}
+
+.helpbot-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Chat “sheet” */
+.helpbot-sheet {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+
+  width: min(420px, calc(100vw - 40px));
+  height: min(560px, calc(100dvh - 40px));
+
+  background: black;
+  border: 1px solid white;
+
+  display: flex;
+  flex-direction: column;
+
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.25s ease;
+}
+
+.helpbot-overlay.open .helpbot-sheet {
+  transform: translateY(0) scale(1);
+}
+
+.helpbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px;
+  border-bottom: 1px solid white;
+}
+
+.helpbot-title {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+.helpbot-close {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.helpbot-messages {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.bot-message {
+  opacity: 0.85;
+  margin-bottom: 10px;
+}
+
+.user-message {
+  text-align: right;
+  margin-bottom: 10px;
+  opacity: 1;
+}
+
+.helpbot-input {
+  border-top: 1px solid white;
+}
+
+.helpbot-input input {
+  width: 100%;
+  padding: 12px 14px;
+  background: black;
+  border: none;
+  color: white;
+  font-size: 1rem;
+}
+
 
 /* SOCIAL ICONS */
 .social-icons {
