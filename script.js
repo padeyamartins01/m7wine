@@ -48,3 +48,98 @@ if (pickupToggle && pickupDropdown) {
     pickupDropdown.classList.remove("open");
   });
 }
+
+/* CHATBOT TOGGLE */
+const chatbotToggle = document.getElementById("chatbot-toggle");
+const chatbotPanel = document.getElementById("chatbot-panel");
+const chatbotClose = document.getElementById("chatbot-close");
+const chatbotContainer = document.getElementById("chatbot-container");
+const contactSection = document.getElementById("contact");
+
+chatbotToggle.addEventListener("click", () => {
+  chatbotPanel.classList.toggle("open");
+});
+
+chatbotClose.addEventListener("click", () => {
+  chatbotPanel.classList.remove("open");
+});
+
+/* PIN CHATBOT AT CONTACT SECTION */
+const observer = new IntersectionObserver(
+  ([entry]) => {
+    if (entry.isIntersecting) {
+      // Switch to absolute so it stops before footer
+      chatbotContainer.classList.add("pinned");
+
+      const contactRect = contactSection.getBoundingClientRect();
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      chatbotContainer.style.top =
+        scrollTop +
+        contactRect.bottom -
+        chatbotContainer.offsetHeight -
+        24 +
+        "px";
+    } else {
+      chatbotContainer.classList.remove("pinned");
+      chatbotContainer.style.top = "";
+    }
+  },
+  {
+    threshold: 0.15,
+  }
+);
+
+observer.observe(contactSection);
+
+/* CHATBOT LOGIC */
+const chatbotForm = document.getElementById("chatbot-form");
+const chatbotInput = document.getElementById("chatbot-input");
+const chatbotMessages = document.querySelector(".chatbot-messages");
+
+if (chatbotForm) {
+  chatbotForm.addEventListener("submit", (e) => {
+    e.preventDefault(); // 🚫 stop page reload
+
+    const message = chatbotInput.value.trim();
+    if (!message) return;
+
+    // User message
+    const userMsg = document.createElement("div");
+    userMsg.className = "user-msg";
+    userMsg.textContent = message;
+    chatbotMessages.appendChild(userMsg);
+
+    chatbotInput.value = "";
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+    // Fake AI response (replace later with real backend)
+    setTimeout(() => {
+      const botMsg = document.createElement("div");
+      botMsg.className = "bot-msg";
+      botMsg.textContent = getBotReply(message);
+      chatbotMessages.appendChild(botMsg);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }, 600);
+  });
+}
+
+/* SIMPLE PLACEHOLDER RESPONSES */
+function getBotReply(text) {
+  const msg = text.toLowerCase();
+
+  if (msg.includes("pricing") || msg.includes("cost")) {
+    return "Pricing depends on volume, services, and destination states. A team member can follow up with details.";
+  }
+
+  if (msg.includes("pickup")) {
+    return "We offer winery, customer, and distributor pickups. Scheduling is available directly from the site.";
+  }
+
+  if (msg.includes("shipping")) {
+    return "We specialize in compliant DTC, international, and distributor shipping solutions.";
+  }
+
+  return "Thanks for reaching out! A logistics specialist can follow up with more details.";
+}
+
