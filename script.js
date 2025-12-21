@@ -87,3 +87,24 @@ pickupToggle?.addEventListener("click", e => {
 document.addEventListener("click", () => {
   document.querySelector(".pickup-dropdown")?.classList.remove("open");
 });
+
+/* =========================
+   CHATBOT TOGGLE (FIX)
+   ========================= */
+
+const chatbotToggle = document.getElementById("chatbot-toggle");
+const chatbotPanel = document.getElementById("chatbot-panel");
+const chatbotClose = document.getElementById("chatbot-close");
+
+if (chatbotToggle && chatbotPanel) {
+  chatbotToggle.addEventListener("click", () => {
+    chatbotPanel.classList.toggle("open");
+  });
+}
+
+if (chatbotClose && chatbotPanel) {
+  chatbotClose.addEventListener("click", () => {
+    chatbotPanel.classList.remove("open");
+  });
+}
+
