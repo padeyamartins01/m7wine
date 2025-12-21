@@ -123,6 +123,23 @@ a {
   content: "✕";
 }
 
+/* PAGE FADE AFTER INTRO */
+#page-content {
+  opacity: 1;
+  transition: opacity 0.9s ease;
+}
+
+.page-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.page-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
 
 /* MOBILE NAV OVERLAY */
 .mobile-nav {
