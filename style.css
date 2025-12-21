@@ -636,6 +636,7 @@ a {
 @media (max-width: 600px) {
   #chatbot-panel {
     width: 90vw;
+    height: 50vh;
     right: -10px;
   }
 }
