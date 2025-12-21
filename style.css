@@ -105,22 +105,23 @@ a {
   height: 48px;
 
   background: rgba(0,0,0,0.0);
-
   cursor: pointer;
-  display: none;
-  align-content: center;
+
+  display: grid;
+  place-items: center;
 }
 
 .nav-toggle::before {
   content: "☰";
   font-size: 2.5rem;
   color: white;
+  line-height: 1;
 }
 
 .nav-toggle.open::before {
   content: "✕";
-  font-size: 2.5rem;
 }
+
 
 /* MOBILE NAV OVERLAY */
 .mobile-nav {
