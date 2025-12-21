@@ -109,6 +109,7 @@ a {
 
   display: grid;
   place-items: center;
+  display: none;
 }
 
 .nav-toggle::before {
@@ -676,7 +677,8 @@ a {
     display: none;
   }
   .nav-toggle {
-    display: block;
+    display: grid;   /* or flex */
+    place-items: center;
   }
 
   .mobile-nav {
