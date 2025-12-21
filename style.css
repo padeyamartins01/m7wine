@@ -53,13 +53,13 @@ a {
 }
 
 .nav-logo img {
-  height: 42px;
+  height: 60px;
 }
 
 .nav-links a {
   margin-left: 26px;
   letter-spacing: 2px;
-  font-size: 0.95rem;
+  font-size: 1.3rem;
   opacity: 0.9;
 }
 
@@ -291,7 +291,7 @@ a {
 }
 
 .hero-tagline {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 1.6;
   opacity: 0.82;
   max-width: 640px;
