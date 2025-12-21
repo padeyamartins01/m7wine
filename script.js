@@ -1,3 +1,51 @@
+/* =========================
+   INTRO ANIMATION LOGIC
+   ========================= */
+
+const introContainer = document.getElementById("intro-container");
+const introVideo = document.getElementById("introVideo");
+
+const hasSeenIntro = localStorage.getItem("m7_intro_seen");
+
+if (introContainer && introVideo) {
+  if (hasSeenIntro) {
+    introContainer.remove();
+    document.body.style.overflow = "";
+  } else {
+    document.body.style.overflow = "hidden";
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (isMobile) {
+      introVideo.src = "pictures/ani2_mobile.mp4";
+    }
+
+    introVideo.load();
+    introVideo.play().catch(() => {});
+
+    introVideo.onended = () => {
+      introContainer.classList.add("fade-out");
+
+      setTimeout(() => {
+        introContainer.remove();
+        document.body.style.overflow = "";
+        localStorage.setItem("m7_intro_seen", "true");
+      }, 900);
+    };
+
+    introContainer.addEventListener("click", () => {
+      introContainer.classList.add("fade-out");
+
+      setTimeout(() => {
+        introContainer.remove();
+        document.body.style.overflow = "";
+        localStorage.setItem("m7_intro_seen", "true");
+      }, 600);
+    });
+  }
+}
+
+
+
 const navToggle = document.getElementById("navToggle");
 const mobileNav = document.getElementById("mobileNav");
 
@@ -142,5 +190,6 @@ function getBotReply(text) {
 
   return "Thanks for reaching out! A logistics specialist can follow up with more details.";
 }
+
 
 
