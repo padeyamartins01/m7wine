@@ -1,7 +1,3 @@
-/* =========================
-   INTRO ANIMATION LOGIC
-   ========================= */
-
 const introContainer = document.getElementById("intro-container");
 const introVideo = document.getElementById("introVideo");
 
@@ -14,35 +10,43 @@ if (introContainer && introVideo) {
   } else {
     document.body.style.overflow = "hidden";
 
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    if (isMobile) {
+    // Mobile source swap
+    if (window.matchMedia("(max-width: 768px)").matches) {
       introVideo.src = "pictures/ani2_mobile.mp4";
     }
 
+    introVideo.muted = true;
+    introVideo.playsInline = true;
     introVideo.load();
-    introVideo.play().catch(() => {});
 
-    introVideo.onended = () => {
+    const playPromise = introVideo.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Fallback: tap to start
+        introContainer.addEventListener(
+          "click",
+          () => introVideo.play(),
+          { once: true }
+        );
+      });
+    }
+
+    introVideo.onended = () => exitIntro();
+    introContainer.addEventListener("click", exitIntro);
+
+    function exitIntro() {
       introContainer.classList.add("fade-out");
 
       setTimeout(() => {
         introContainer.remove();
         document.body.style.overflow = "";
         localStorage.setItem("m7_intro_seen", "true");
-      }, 900);
-    };
-
-    introContainer.addEventListener("click", () => {
-      introContainer.classList.add("fade-out");
-
-      setTimeout(() => {
-        introContainer.remove();
-        document.body.style.overflow = "";
-        localStorage.setItem("m7_intro_seen", "true");
-      }, 600);
-    });
+      }, 800);
+    }
   }
 }
+
 
 
 
