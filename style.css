@@ -78,8 +78,6 @@ a {
   height: 48px;
 
   background: rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,255,255,0.35);
-  border-radius: 12px;
 
   cursor: pointer;
   display: none;
@@ -118,10 +116,11 @@ a {
 
 .mobile-nav a {
   display: block;
-  margin-bottom: 22px;
+  margin-bottom: 40px;
   font-size: 1.5rem;
   letter-spacing: 2px;
   opacity: 0.92;
+  gap: 20px;
 }
 
 .mobile-nav a:hover {
@@ -498,26 +497,30 @@ a {
 
 
 /* Chat panel */
+/* Chat panel (DESKTOP) */
 #chatbot-panel {
   position: absolute;
   bottom: 72px;
   right: 0;
 
-  width: 320px;
-  max-height: 440px;
+  width: 420px;          /* ⬅ wider */
+  height: 560px;         /* ⬅ taller */
 
   background: #111;
   border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 18px;
+  border-radius: 22px;
 
   display: none;
   flex-direction: column;
   overflow: hidden;
+
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
 
 #chatbot-panel.open {
   display: flex;
 }
+
 
 /* Header */
 .chatbot-header {
@@ -650,6 +653,12 @@ a {
 
   .mobile-nav {
     padding: 110px 26px;
+
+  }
+
+  .mobile-nav a {
+    gap: 40px;
+
   }
 
   .hero-bg::after {
@@ -705,3 +714,4 @@ a {
     min-width: 220px;
   }
 }
+
