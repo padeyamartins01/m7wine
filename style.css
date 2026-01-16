@@ -54,16 +54,18 @@ a { color: white; text-decoration: none; }
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 28px 28px; /* thicker */
+  padding: 33px 10px; /* thicker */
   display: flex;
   align-items: center;
 }
 
-.nav-logo { flex: 0 0 auto; }
+.nav-logo { flex: 0 0 auto;
+padding-right: 100px; }
 .nav-logo img { height: 64px; }
 
 .nav-links {
   margin-left: auto;
+  padding-left: 100px;
   display: flex;
   align-items: center;
   gap: 26px;
@@ -291,7 +293,7 @@ a { color: white; text-decoration: none; }
   gap: 18px;
 }
 .hero-panel h3 {
-  font-size: clamp(1.2rem, 2vw, 1.9rem);
+  font-size: clamp(1.2rem, 1.5vw, 1.9rem);
   letter-spacing: 1px;
   font-weight: 600;
 }
