@@ -451,6 +451,33 @@ padding-right: 100px; }
   margin: 0 auto;
 }
 
+/* Sub-services inside service tiles */
+.service-subservices{
+  list-style: none;
+  padding: 0;
+  margin: 14px auto 0;
+  max-width: 280px;
+  text-align: center;
+}
+
+.service-subservices li{
+  font-size: 1.05rem;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  opacity: 0.75;
+  padding: 6px 0;
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+
+.service-subservices li:first-child{
+  border-top: none;
+}
+
+@media (max-width: 900px){
+  .service-subservices{ max-width: 520px; }
+}
+
+
 /* ABOUT */
 .about-inner { max-width: 980px; margin: 0 auto; }
 .about-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -583,7 +610,6 @@ padding-right: 100px; }
   height: 360px;
   border: 0;
   display: block;
-  filter: grayscale(100%) contrast(110%);
   opacity: 0.95;
 }
 
