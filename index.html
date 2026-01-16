@@ -14,269 +14,383 @@
 
 <body>
 
+  <!-- INTRO -->
   <div id="intro-container">
-  <video
-  id="introVideo"
-  muted
-  playsinline
-  webkit-playsinline
-  preload="auto"
->
-
-    <source src="pictures/ani2.mp4" type="video/mp4" />
-  </video>
-</div>
-
-<!-- TOP NAV -->
-<header class="top-nav">
-  <div class="nav-inner">
-
-    <div class="nav-logo">
-  <a href="#hero" aria-label="Back to top">
-    <img
-      src="https://www.m7wine.com/wp-content/themes/WordPress/assets/images/M7_Only_Invert.webp"
-      alt="M7 Wine Solutions logo"
-    />
-  </a>
-</div>
-
-
-    <nav class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-      <a href="https://fort.m7wine.com/">Client Login</a>
-    </nav>
+    <video id="introVideo" muted playsinline webkit-playsinline preload="auto">
+      <source src="pictures/ani2.mp4" type="video/mp4" />
+    </video>
   </div>
-</header>
 
-<!-- MOBILE NAV -->
-<div class="mobile-nav" id="mobileNav">
+  <!-- TOP NAV -->
+  <header class="top-nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <a href="#hero" aria-label="Back to top">
+          <img
+            src="https://www.m7wine.com/wp-content/themes/WordPress/assets/images/M7_Only_Invert.webp"
+            alt="M7 Wine Solutions logo"
+          />
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu" type="button"></button>
+
+      <nav class="nav-links">
   <a href="#services">Services</a>
   <a href="#about">About</a>
+  <a href="#team">Our Team</a>
   <a href="#contact">Contact</a>
+
+  <!-- NAV ACTIONS (buttons on the right) -->
+  <div class="nav-actions">
+
+    <div class="pickup-dropdown pickup-nav">
+      <button class="nav-pickup-btn" id="pickupToggleNav" type="button">
+        Schedule Pickup <span class="caret">▾</span>
+      </button>
+
+      <div class="pickup-menu" id="pickupMenuNav">
+        <a href="https://m7wine.setmore.com/">Winery / Customer Pick-Up</a>
+        <a href="https://www.m7wine.com/distributor-pickup/">Distribution Pick-Up</a>
+      </div>
+    </div>
+
+    <a class="nav-login" href="https://fort.m7wine.com/">Client Login</a>
+  </div>
+</nav>
+
+
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="#team">Our Team</a>
+  <a href="#contact">Contact</a>
+
+  <a href="https://m7wine.setmore.com/">Schedule Pickup (Winery/Customer)</a>
+  <a href="https://www.m7wine.com/distributor-pickup/">Schedule Pickup (Distribution)</a>
   <a href="https://fort.m7wine.com/">Client Login</a>
 </div>
 
-<button class="nav-toggle" id="navToggle" aria-label="Toggle Menu"></button>
+  <!-- PAGE CONTENT WRAPPER (THIS IS IMPORTANT FOR YOUR FADE JS) -->
+  <div id="page-content" class="page-hidden">
 
-<main>
+    <main>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg">
-    <div class="hero-slideshow">
-      <img src="pictures/projects/projects-capsule-application.jpg" class="active" alt="Capsule application" />
-      <img src="pictures/projects/projects-custom-packaging.jpg" alt="Custom packaging" />
-      <img src="pictures/projects/projects-hand-labeling.jpg" alt="Hand labeling" />
-    </div>
-  </div>
+      <!-- HERO -->
+      <section class="hero" id="hero">
+        <div class="hero-bg">
+          <div class="hero-slideshow">
+            <img src="pictures/projects/projects-capsule-application.jpg" class="active" alt="Capsule application" />
+            <img src="pictures/projects/projects-custom-packaging.jpg" alt="Custom packaging" />
+            <img src="pictures/projects/projects-waxing.jpg" alt="Waxing" />
+          </div>
+        </div>
 
-  <div class="hero-content">
-    <img
-      class="hero-logo-large"
-      src="https://www.m7wine.com/wp-content/themes/WordPress/assets/images/M7_Only_Invert.webp"
-      alt="M7 Logo"
-    />
-    <h1 class="hero-subtitle">Wine Solutions</h1>
-    <p class="hero-tagline">Wine Fulfillment & Logistics</p>
+        <div class="hero-content">
+          <!-- This can later become your transparent overlay PNG -->
+          <img
+            class="hero-logo-large"
+            src="pictures/m7_wine_solutions_hero.png"
+            alt="M7 Logo"
+          />
 
-    <div class="hero-cta">
+          <h1 class="hero-subtitle">Premier Fulfillment & Logistics</h1>
+        </div>
+      </section>
 
-  <div class="pickup-dropdown">
-    <button class="btn btn-primary pickup-btn" id="pickupToggle">
-      Schedule Pick-Up
-      <span class="caret">▾</span>
-    </button>
+      <!-- HERO CLIENT PANEL (separate strip like screenshot) -->
+      <section class="hero-panel" aria-label="Client Panel">
+        <div class="hero-panel-inner">
+          <h3>Are you a current client? Welcome back!</h3>
 
-    <div class="pickup-menu" id="pickupMenu">
-      <a href="https://m7wine.setmore.com/">Winery / Customer Pick-Up</a>
-      <a href="https://www.m7wine.com/distributor-pickup/">Distribution Pick-Up</a>
-    </div>
-  </div>
+          <div class="hero-panel-actions">
+            <div class="pickup-dropdown pickup-panel">
+              <button class="btn btn-primary pickup-btn" id="pickupTogglePanel" type="button">
+                Schedule Pick-Up <span class="caret">▾</span>
+              </button>
+
+              <div class="pickup-menu" id="pickupMenuPanel">
+                <a href="https://m7wine.setmore.com/">Winery / Customer Pick-Up</a>
+                <a href="https://www.m7wine.com/distributor-pickup/">Distribution Pick-Up</a>
+              </div>
+            </div>
+
+            <a class="btn btn-ghost hero-login-btn" href="https://fort.m7wine.com/">
+              Client Login
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES (small icon-grid like Vinfillment) -->
+      <section id="services" class="section dark">
+        <h2 class="section-title">M7 Offerings</h2>
+
+        <div class="services-grid tiles">
+
+          <div class="service-tile">
+            <div class="service-icon"><i class="fa-solid fa-box-open"></i></div>
+            <h3>I. DTC Shipping</h3>
+            <p>Fully managed direct-to-consumer fulfillment with compliance and carrier integrations.</p>
+          </div>
+
+          <div class="service-tile">
+            <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
+            <h3>II. Projects</h3>
+            <p>Special builds, kitting, and white-glove project execution for seasonal and one-off needs.</p>
+          </div>
+
+          <div class="service-tile">
+            <div class="service-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <h3>III. Custom Packaging</h3>
+            <p>Branded packing, inserts, protective solutions, and temperature-aware materials.</p>
+          </div>
+
+          <div class="service-tile">
+            <div class="service-icon"><i class="fa-solid fa-desktop"></i></div>
+            <h3>IV. Online Winery Portal</h3>
+            <p>Quick access to order status, reporting, inventory visibility, and shipping workflows.</p>
+          </div>
+
+          <div class="service-tile">
+            <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
+            <h3>V. High Touch Customer Service</h3>
+            <p>Fast support, proactive updates, and issue resolution that protects your brand.</p>
+          </div>
+
+          <div class="service-tile">
+            <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <h3>VI. Co-packing & Collaborations</h3>
+            <p>Specialty builds, collabs, and custom runs handled end-to-end with consistent quality.</p>
+          </div>
+
+          <div class="service-tile">
+            <div class="service-icon"><i class="fa-solid fa-truck-fast"></i></div>
+            <h3>VII. Zone Skipping</h3>
+            <p>Reduce shipping time and cost by injecting closer to your customers — faster delivery with optimized carrier routes.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="section about">
+        <div class="about-inner">
+          <h2 class="section-title">M7 Mission</h2>
+          <p class="section-subtitle">At M7, we know that what makes our partners successful is that every winery offers something original, something special; our goal is to carry each unique experience from tasting room to delivery. M7 Wine Solutions isn't merely a fulfillment and logistics provider, rather we're the winery's partner, an extension of the winery.</p>
+
+          <div class="about-actions">
+          </div>
+        </div>
+      </section>
+
+      <!-- OUR TEAM -->
+      <section id="team" class="section team">
+        <div class="team-inner">
+          <h2 class="section-title">Our Team</h2>
+          <p class="section-subtitle">
+            Experienced departments working together to move your wine safely, accurately, and on time.
+          </p>
+
+          <div class="team-depts">
+
+            <div class="team-dept">
+              <h3 class="team-dept-title">ORDER PROCESSING</h3>
+              <ul class="team-list">
+                <li>Andrea Sherman <span>|</span> Accounts Manager</li>
+                <li>Eva Castro <span>|</span> Winery Will Call &amp; Distribution</li>
+              </ul>
+            </div>
+
+            <div class="team-dept">
+              <h3 class="team-dept-title">CUSTOMER CARE</h3>
+              <ul class="team-list">
+                <li>Stormie Blevins <span>|</span> Customer Will Calls</li>
+                <li>Jen Aileen Pantaleon <span>|</span> Claims &amp; Returns</li>
+              </ul>
+            </div>
+
+            <div class="team-dept">
+              <h3 class="team-dept-title">WAREHOUSE &amp; INVENTORY</h3>
+              <ul class="team-list">
+                <li>Jaime Godinez <span>|</span> Warehouse Manager</li>
+                <li>Jose Ramirez <span>|</span> Inventory Manager</li>
+              </ul>
+            </div>
+
+            <div class="team-dept">
+              <h3 class="team-dept-title">SPECIALTY SERVICES</h3>
+              <ul class="team-list">
+                <li>Jennifer Pitman <span>|</span> Transportation &amp; International Shipping</li>
+                <li>DeeDee Barrera <span>|</span> Specialty Projects</li>
+                <li>Melissa Aquila <span>|</span> Billing &amp; Administration</li>
+              </ul>
+            </div>
+
+            <div class="team-dept team-dept-wide">
+              <h3 class="team-dept-title">EXECUTIVE TEAM</h3>
+              <ul class="team-list">
+                <li>Chris Sweetanos <span>|</span> Chief Executive Officer</li>
+                <li>Melissa Spencer <span>|</span> Vice President, Operations</li>
+                <li>Jarod Sproule <span>|</span> Director of Production</li>
+                <li>Josh Hart <span>|</span> Director of Communications</li>
+                <li>Andrea Penley <span>|</span> Customer Experience Director</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="team-actions">
+            <a class="btn btn-ghost" href="about.html">Learn More</a>
+          </div>
+        </div>
+      </section>
 
 
-</div>
 
-  </div>
-</section>
+      <!-- CONTACT -->
+      <section id="contact" class="section dark">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Tell us what you need — we’ll respond quickly with next steps.</p>
 
-<!-- SERVICES -->
-<section id="services" class="section dark">
-  <h2 class="section-title">[Services]</h2>
-  <p class="section-subtitle">[Caption]</p>
+        <div class="contact-wrap">
+          <form class="contact-form" autocomplete="on">
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+            </div>
 
-  <div class="services-grid">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="jane@winery.com" required />
+            </div>
 
-    <div class="service-card">
-      <img src="pictures/services/piclaceholder.png" alt="DTC Shipping">
-      <h3>Service 1</h3>
-      <p>[Enter paragraph here]</p>
-      <a class="btn btn-outline" href="services.html#dtc-shipping">Learn More</a>
-    </div>
+            <div class="field">
+              <label for="company">Winery / Company</label>
+              <input id="company" name="company" type="text" placeholder="Your winery name" />
+            </div>
 
-    <div class="service-card">
-      <img src="pictures/services/piclaceholder.png" alt="International Shipping">
-      <h3>Service 2</h3>
-      <p>[Enter paragraph here]</p>
-      <a class="btn btn-outline" href="services.html#international-shipping">Learn More</a>
-    </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="(###) ###-####" />
+            </div>
 
-    <div class="service-card">
-      <img src="pictures/services/piclaceholder.png" alt="Distribution">
-      <h3>Service 3</h3>
-      <p>[Enter paragraph here]</p>
-      <a class="btn btn-outline" href="services.html#distribution">Learn More</a>
-    </div>
+            <div class="field field-full">
+              <label for="service">Service Interest</label>
+              <select id="service" name="service">
+                <option value="" selected>Select one</option>
+                <option>DTC Shipping</option>
+                <option>Custom Packaging</option>
+                <option>Portal Access</option>
+                <option>Customer Service</option>
+                <option>Co-packing</option>
+                <option>Other</option>
+              </select>
+            </div>
 
-    <div class="service-card">
-      <img src="pictures/services/piclaceholder.png" alt="Liviri Shippers">
-      <h3>Service 4</h3>
-      <p>[Enter paragraph here]</p>
-      <a class="btn btn-outline" href="services.html#liviri-shippers">Learn More</a>
-    </div>
+            <div class="field field-full">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Share details..." required></textarea>
+            </div>
 
-    <div class="service-card">
-      <img src="pictures/services/piclaceholder.png" alt="Green Cell Foam">
-      <h3>Service 5</h3>
-      <p>[Enter paragraph here]</p>
-      <a class="btn btn-outline" href="services.html#green-cell-foam">Learn More</a>
-    </div>
+            <div class="form-actions field-full">
+              <button class="btn btn-primary" type="submit">Send Message</button>
+              <p class="form-hint">For quicker responses, ask our helpbot.</p>
+            </div>
+          </form>
+        </div>
+      </section>
 
-    <div class="service-card">
-      <img src="pictures/services/piclaceholder.png" alt="Vinum55 Delivery">
-      <h3>Service 6</h3>
-      <p>[Enter paragraph here]</p>
-      <a class="btn btn-outline" href="services.html#vinum55-delivery">Learn More</a>
-    </div>
+    </main>
 
-  </div>
-</section>
+    <!-- GOOGLE MAP -->
+    <section class="map-strip" aria-label="Location Map">
+      <div class="map-inner">
+        <iframe
+          title="M7 Wine Solutions Location"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=502%20Devlin%20Rd,%20Napa%20CA&output=embed">
+        </iframe>
+      </div>
+    </section>
 
-<!-- ABOUT -->
-<section id="about" class="section about">
-  <div class="about-inner">
-    <h2 class="section-title">[About]</h2>
-    <p class="section-subtitle">
-      [caption]
-    </p>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4>Menu</h4>
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="https://fort.m7wine.com/">Client Login</a>
+        </div>
 
-    <div class="about-actions">
-      <a class="btn btn-primary" href="about.html">Learn More</a>
-    </div>
-  </div>
-</section>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <p class="footer-strong">(707) 681-1977</p>
+          <p>502 Devlin Rd<br/>Napa, CA</p>
+          <p class="footer-dim">Mon–Fri • 8:00am – 5:00pm</p>
+        </div>
 
-<!-- CONTACT -->
-<section id="contact" class="section dark">
-  <h2 class="section-title">Contact Us</h2>
-  <p class="section-subtitle">Tell us what you need — we’ll respond quickly with next steps.</p>
-
-  <div class="contact-wrap">
-    <form class="contact-form" autocomplete="on">
-      <div class="field">
-        <label for="name">Full Name</label>
-        <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+        <div class="footer-col">
+          <h4>Shipping Partners</h4>
+          <div class="partner-logos">
+            <div class="partner-pill">UPS</div>
+            <div class="partner-pill">FedEx</div>
+          </div>
+          <p class="footer-dim">Reliable carrier integrations for DTC shipments.</p>
+        </div>
       </div>
 
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" placeholder="jane@winery.com" required />
+      <div class="footer-bottom">
+        <div class="footer-left">
+          <span>© <span id="year"></span> M7 Wine Solutions</span>
+        </div>
+
+        <div class="footer-right">
+          <a aria-label="Facebook" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a aria-label="Instagram" href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
       </div>
+    </footer>
 
-      <div class="field">
-        <label for="company">Winery / Company</label>
-        <input id="company" name="company" type="text" placeholder="Your winery name" />
-      </div>
+    <!-- AI CHATBOT (PUT BACK) -->
+    <div id="chatbot-container">
+      <button id="chatbot-toggle" aria-label="Open chat">
+        <img src="pictures/bot.svg" alt="Chatbot" />
+      </button>
 
-      <div class="field">
-        <label for="phone">Phone</label>
-        <input id="phone" name="phone" type="tel" placeholder="(###) ###-####" />
-      </div>
+      <div id="chatbot-panel">
+        <div class="chatbot-header">
+          <span>M7 Helpbot</span>
+          <button id="chatbot-close" type="button">✕</button>
+        </div>
 
-      <div class="field field-full">
-        <label for="service">Service Interest</label>
-        <select id="service" name="service">
-          <option value="" selected>Select one</option>
-          <option>DTC Shipping</option>
-          <option>International Shipping</option>
-          <option>Distribution</option>
-          <option>Liviri Shippers</option>
-          <option>Green Cell Foam</option>
-          <option>Vinum55 Delivery</option>
-          <option>Other</option>
-        </select>
-      </div>
+        <div class="chatbot-messages">
+          <div class="bot-msg">
+            Hi! 👋 How can I help with fulfillment, logistics, or pricing today?
+          </div>
+        </div>
 
-      <div class="field field-full">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" placeholder="Share details (volume, states, timing, special requirements)..." required></textarea>
-      </div>
-
-      <div class="form-actions field-full">
-        <button class="btn btn-primary" type="submit">Send Message</button>
-        <p class="form-hint">For quicker responses, ask our helpbot.</p>
-      </div>
-    </form>
-  </div>
-</section>
-
-</main>
-
-<!-- AI CHATBOT -->
-<div id="chatbot-container">
-  <button id="chatbot-toggle" aria-label="Open chat">
-  <img src="pictures/bot.svg" alt="Chatbot" />
-</button>
-
-
-  <div id="chatbot-panel">
-    <div class="chatbot-header">
-      <span>M7 Helpbot</span>
-      <button id="chatbot-close">✕</button>
-    </div>
-
-    <div class="chatbot-messages">
-      <div class="bot-msg">
-        Hi! 👋 How can I help with fulfillment, logistics, or pricing today?
+        <form class="chatbot-input" id="chatbot-form">
+          <input
+            type="text"
+            id="chatbot-input"
+            placeholder="Ask a question…"
+            autocomplete="off"
+          />
+          <button type="submit">Send</button>
+        </form>
       </div>
     </div>
 
-    <form class="chatbot-input" id="chatbot-form">
-  <input
-    type="text"
-    id="chatbot-input"
-    placeholder="Ask a question…"
-    autocomplete="off"
-  />
-  <button type="submit">Send</button>
-</form>
+  </div><!-- /#page-content -->
 
-  </div>
-</div>
-
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-left">
-      <span>© <span id="year"></span> M7 Wine Solutions</span>
-    </div>
-
-    <div class="footer-center">
-      <span>(707) 681-1977</span>
-      <span class="dot">•</span>
-      <span>502 Devlin Rd, Napa CA</span>
-    </div>
-
-    <div class="footer-right">
-      <a aria-label="Facebook" href="#"><i class="fa-brands fa-facebook-f"></i></a>
-      <a aria-label="Instagram" href="#"><i class="fa-brands fa-instagram"></i></a>
-    </div>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
