@@ -3,6 +3,8 @@ html { scroll-behavior: smooth; }
 html, body {
   width: 100%;
   overflow-x: hidden;
+  font-family: "HelveticaNeueThin", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
 }
 
 /* INTRO */
@@ -22,15 +24,18 @@ html, body {
 
 /* FONT */
 @font-face {
-  font-family: HelveticaNeueThin;
-  src: url("fonts/HelveticaNeue Thin.ttf");
+  font-family: "HelveticaNeueThin";
+  src: url("fonts/HelveticaNeue Thin.ttf") format("truetype");
+  font-weight: 200; /* <-- Thin is usually 200 */
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: HelveticaNeueThin, sans-serif;
+  font-family: inherit;
 }
 
 body { background: black; color: white; }
@@ -267,6 +272,7 @@ padding-right: 100px; }
   font-size: clamp(1.7rem, 3vw, 2.2rem); /* bigger */
   letter-spacing: 8px;
   margin-bottom: 16px;
+  letter-spacing: 17px;
 }
 
 .hero-tagline {
@@ -296,7 +302,7 @@ padding-right: 100px; }
 .hero-panel h3 {
   font-size: clamp(1.2rem, 1.5vw, 1.9rem);
   letter-spacing: 1px;
-  font-weight: 600;
+  font-weight: 300;
 }
 .hero-panel-actions {
   display: flex;
@@ -314,6 +320,18 @@ padding-right: 100px; }
   color: #111;
   border: 1px solid rgba(0,0,0,0.25);
 }
+
+h1,h2,h3,h4,h5,h6,
+.nav-links a,
+.btn {
+  font-weight: 300;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  font-weight: 300;
+}
+
 
 /* PICKUP DROPDOWN (used in panel) */
 .pickup-dropdown { position: relative; }
